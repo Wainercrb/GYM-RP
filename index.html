@@ -1,10 +1,39 @@
-<!DOCTYPE html>
-<html lang="en">
+	<!DOCTYPE html>
+	<html lang="en">
 <head>
-	<meta charset="UTF-8">
-	<title>GYM-UTN</title>
-</head>
-<body>
-	
-</body>
+		<meta charset="UTF-8">
+		<title>GYM-UTN</title>
+		<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta/css/bootstrap.min.css" integrity="sha384-/Y6pD6FV/Vv2HJnA6t+vslU6fwYXjCFtcEpHbNJ0lyAFsXTsjBbfaDjzALeQsN6M" crossorigin="anonymous">
+		<link href="css/estilos.css" rel='stylesheet' type='text/css' />
+	</head>
+	<body>
+		<div class="header" id="home">
+		<div class="container">
+			<div class="logo">
+				<a href="index.html"><img src="images/logo-2.png" alt=""></a>
+			</div>
+			<div class="navigation">
+			 <span class="menu"></span> 
+				<ul class="navig">
+					<li><a class="active" href="index.html">Home</a><span> </span></li>
+					<li><a href="about.html">Mi Historial</a><span> </span></li>
+					<li><a href="blog.html">Ingresar</a><span> </span></li>
+					<li><a href="pages.html">Login</a><span> </span></li>
+					<li><a href="gallery.html">Gallery</a><span> </span></li>
+					<li><a href="contact.html">Contacto</a><span> </span></li>
+				</ul>
+			</div>
+				 <!-- script-for-menu -->
+		 <script>
+				$("span.menu").click(function(){
+					$(" ul.navig").slideToggle("slow" , function(){
+					});
+				});
+		 </script>
+		 <!-- script-for-menu -->
+		</div>
+		</div>
+		
+	<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta/js/bootstrap.min.js" integrity="sha384-h0AbiXch4ZDo7tp9hKZ4TsHbi047NrKGLO3SEJAg45jXxnGIfYzk4Si90RDIqNm1" crossorigin="anonymous"></script>
+	</body>
 </html>
