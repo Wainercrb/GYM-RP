@@ -1,46 +1,70 @@
 <!DOCTYPE html>
-<html lang="en">
-	<head>
-		<title>GTY-UTN</title>
-		<meta name="viewport" content="widt=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
-		<link rel="stylesheet" type="text/css" href="css/estilos.css">
-		<link rel="stylesheet" type="text/css" href="css/bootstrap.min.css">
-		<link media="all" type="text/css" rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.6.3/css/font-awesome.min.css">
-	</head>
-	<body>
-		<div class="container-fluid">
-			<div class="row">
-				<div class="col-md-3 col-sm-3 sidebar2">
-					<div class="logo text-center">
-						<img src="imagenes/usuario.png" class="img-responsive center-block" alt="Logo">
-						<h4>USUARIO</h4>
+<html lang="">
+
+<head>
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<title>Login</title>
+	<link rel="stylesheet" href="css/bootstrap.css">
+	<link rel="stylesheet" href="css/estiloLogin.css">
+</head>
+
+<body>
+	<div class="login-wrap">
+		<div class="login-html">
+			<input id="tab-1" type="radio" name="tab" class="sign-in" checked><label for="tab-1" class="tab">Sign In</label>
+			<input id="tab-2" type="radio" name="tab" class="sign-up"><label for="tab-2" class="tab">Sign Up</label>
+			<div class="login-form">
+				<div class="sign-in-htm">
+					<div class="group">
+						<label for="user" class="label">Username</label>
+						<input id="user" type="text" class="input">
 					</div>
-					<br>
-					<div class="left-navigation">
-						<ul class="list">
-							<li><i class="fa fa-users" aria-hidden="true"></i></i >REGISTRO</li>
-							<li><i class="fa fa-user" aria-hidden="true"></i>INGRESAR</li>
-							<li><i class="fa fa-bar-chart" aria-hidden="true"></i>OBJETIVOS</li>
-							<li><i class="fa fa-clock-o" aria-hidden="true"></i>MI HISTORIAL</li>
-							<li><i class="fa fa-heart" aria-hidden="true"></i>NOSOTROS</li>
-							<li><i class="fa fa-commenting-o" aria-hidden="true"></i>SUGERENCIAS</li>
-							<li><i class="fa fa-times-circle" aria-hidden="true"></i>SALIR</li>
-						</ul>
+					<div class="group">
+						<label for="pass" class="label">Password</label>
+						<input id="pass" type="password" class="input" data-type="password">
+					</div>
+					<div class="group">
+						<input id="check" type="checkbox" class="check" checked>
+						<label for="check"><span class="icon"></span> Keep me Signed in</label>
+					</div>
+					<div class="group">
+						<input onclick="loginIngreso();" type="submit" class="button" value="Sign In">
+					</div>
+					<div class="hr"></div>
+					<div class="foot-lnk">
+						<a href="#forgot">Forgot Password?</a>
 					</div>
 				</div>
-				<!--este div es la parte del de la información de la página-->
-				<div class="col-md-9 col-sm-8 main-content">
-					<h1 class="GYM-UTN">GYM-UTN
-				</div>
-				<div class="col-md-9 col-sm-8 main-content"><img src="https://images.vexels.com/media/users/3/132665/isolated/lists/cf0b4b825cd99b7e00ccf5cad3e7a014-weightlifting-circle-icon.png" class="device">
-				</div>
-				<div class="col-md-9 col-sm-8 main-content">
-					<h1 class="cnt">¡Siempre pensando en usted!</h1>
-					<p class="cnt">Esperamos que pueda lograr sus objetivos, día a dia, ya que esa es nuestra meta, estaremos actualizando esta página para que te sintas como en tu casa. </p>
-				</div>
-			</div>
-		</div>
-		<script src="js/jquery-3.2.1.min.js"></script>
-		<script src="js/bootstrap.min.js"></script>
-	</body>
+				<div class="sign-up-htm">
+					<div class="group">
+						<label for="user" class="label">Username</label>
+						<input id="user" type="text" class="input">
+					</div>
+					<div class="group">
+						<label for="pass" class="label">Password</label>
+						<input id="pass" type="password" class="input" data-type="password">
+					</div>
+					<div class="group">
+						<label for="pass" class="label">Repeat Password</label>
+						<input id="pass" type="password" class="input" data-type="password">
+					</div>
+					<div class="group">
+						<label for="pass" class="label">Email Address</label>
+						<input id="pass" type="text" class="input">
+					</div>
+					<div class="group">
+						<input type="submit" class="button" value="Sign Up">
+					</div>
+					<div class="hr"></div>
+					<div class="foot-lnk">
+						<label for="tab-1">Already Member?</a>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<script language="JavaScript" type="text/javascript" src="js/direccionamiento.js"></script>
+</body>
+
 </html>
