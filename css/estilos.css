@@ -1,150 +1,81 @@
-
 @import url('https://fonts.googleapis.com/css?family=Kaushan+Script');
-
-
 body{
-  font-family: 'Raleway', sans-serif;
-  background-image: url("http://arenassport.com/wp-content/uploads/2012/12/Banner-Fitness.gif");
-  background-size:cover;
-
-
-
+font-family: 'Raleway', sans-serif;
+background-image: url("http://arenassport.com/wp-content/uploads/2012/12/Banner-Fitness.gif");
+background-size:cover;
 }
-
 html,body, .container-fluid, .sidebar2,.main-content{
-  height:100%;
-
+height:100%;
 }
-
 .GYM-UTN{
-  font-family: 'Kaushan Script', cursive;
+font-family: 'Kaushan Script', cursive;
 }
 .sidebar2 {
-    background-color: #1a1f27;
-    padding: 0px !important;
-    box-shadow: 2px 2px 5px #262a35;
-    z-index: 1000;
-    height: 100%;
-    position: fixed;
-
+background-color: #1a1f27;
+padding: 0px !important;
+box-shadow: 2px 2px 5px #262a35;
+z-index: 1000;
+height: 100%;
+position: fixed;
 }
 .logo {
-    min-height:200px;
-    color:#afb1b5;
+min-height:200px;
+color:#afb1b5;
 }
 .logo>img {
-    margin-top: 60px;
-    padding: 1px;
-    border: 3px solid #F17153;
-    border-radius: 100%;
-    background-color: #fff;
-    width: 60% !important;
-    height: 60% !important;
+margin-top: 60px;
+padding: 1px;
+border: 3px solid #F17153;
+border-radius: 100%;
+background-color: #fff;
+width: 60% !important;
+height: 60% !important;
 }
 .btn.Add-friend:hover,.btn.Add-friend:active,.btn.Add-friend:active:focus,.btn.Add-friend:active:hover,.btn.Add-friend:visited,.btn.Add-friend:focus
 {
-  background-color:#F17153;
-  border: 0.5px solid transparent;
-  color:white;
-  outline:none;
-  font-weight:600;
-
+background-color:#F17153;
+border: 0.5px solid transparent;
+color:white;
+outline:none;
+font-weight:600;
 }
-
 .list {
-    color: #eee;
-    list-style: none;
-    padding-left: 0px;
+color: #eee;
+list-style: none;
+padding-left: 0px;
 }
 li:nth-child(odd) {
-    background-color:#13171d;
+background-color:#13171d;
 }
 li>i {margin-right:15px;
 }
 .list> li {
-    padding: 15px 0px 15px 40px;
-    font-size: 16px;
-    font-weight:lighter;
+padding: 15px 0px 15px 40px;
+font-size: 16px;
+font-weight:lighter;
 }
 .list>li:hover {
-
-    color: white;
-    box-shadow:1px 1px 10px 1px #50e6df inset;
-    transition: padding-left 0.2s linear;
-    padding-left: 60px;
-
+color: white;
+box-shadow:1px 1px 10px 1px #50e6df inset;
+transition: padding-left 0.2s linear;
+padding-left: 60px;
 }
-.main-content{ 
-
-    color:#fff; 
-    text-align:center;
+.main-content{
+color:#fff;
+text-align:center;
 }
 @media (max-width: 766px) and (min-width: 50px) {
 .logo {
-  
-  padding-top: 10% !important;
+
+padding-top: 10% !important;
 }
 .logo>img {
-  margin-top: 0px !important;
-  padding-top: 0px !important;
+margin-top: 0px !important;
+padding-top: 0px !important;
 }
 }
-
 .hero{
-
 }
 .cnt{
 color: #fff;
 }
-
-  .team-sec{
-    float: left;width: 100%;
-  }
-  .team .photo {
-    width: 250px; height: 250px; display: inline-block; overflow: hidden; position: relative; 
-  }
-  .photo-shadow {
-    position: absolute; z-index: -1; top: 12px; left: 16px; bottom: -10px; border: 1px solid #E3E3E3; height: 250px; width: 246px; background: #fff; 
-  }
-  .col-item{
-    position: relative;
-  }
-  .team{
-    margin-top: 60px;
-  }
-  .team .photo img{
-    width: 100%;    vertical-align: middle;position: relative;
-  }
-  .social-connect{
-    margin-top: 13px;
-  }
-  .info{
-    margin-top: 22px;
-  }
-  .info .name{
-    font-size: 18px;font-weight: 600;margin-bottom: 2px;
-  }
-  .info .degination{
-    font-size: 16px;font-weight: 300;font-style: italic;color: #8B8B8B;
-  }
-  .social-connect a{
-   display: inline-block; border: 1px solid #E3E3E3; font-size: 14px; color: #919191; width: 24px; height: 24px; text-align: center; line-height: 24px;margin-right: 4px;
- }
-  .social-connect a .fa{
-    margin: 0;
-  }
-  .social-connect a:hover{
-    background-color: #4EBEE9;color: #fff;
-    } .carousel-line{    border: 1px solid #ddd; height: 320px; position: absolute; bottom: -90px; width: 110%; left: -5.5%;}
-  .carousel-line > .controls{
-    position: absolute; bottom: -16px; left: 50%; margin-left: -50px; background: #fff; padding: 0px 20px; color: #000;
-  }
-  .carousel-line > .controls > a{
-      color: #868686; font-size: 24px; font-weight: 300;
-    }
-
-
-
-
-
-
