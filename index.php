@@ -5,8 +5,8 @@
 		<meta name="viewport" content="width=device-width, initial-scale=1.0">
 		<title>Login</title>
 		<link rel="stylesheet" href="css/bootstrap.css">
-		<link rel="stylesheet" href="css/estiloLogin.css">
 		<link rel="stylesheet" href="css/header.css">
+		<link rel="stylesheet" href="css/estiloLogin.css">
 	</head>
 	<body>
 		<?php
@@ -33,7 +33,6 @@
 						<div class="group">
 							<input onclick="loginIngreso();" type="submit" class="button" value="Ingresar">
 						</div>
-						<div class="hr"></div>
 						<div class="foot-lnk">
 							<a href="#forgot">Olvido su contraseña?</a>
 						</div>
@@ -75,7 +74,6 @@
 						<div class="group">
 							<input  id="pass" type="submit" class="button" value="Registarse ">
 						</div>
-						<div class="hr"></div>
 						<div class="foot-lnk">
 						<label for="tab-1"> Ya eres Mienbro?</a>
 					</div>
@@ -83,6 +81,7 @@
 			</div>
 		</div>
 	</div>
+	<?php include "footer.php" ?>
 	<script language="JavaScript" type="text/javascript" src="js/direccionamiento.js"></script>
 </body>
 </html>

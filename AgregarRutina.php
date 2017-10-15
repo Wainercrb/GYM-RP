@@ -4,13 +4,16 @@
     <meta charset="UTF-8">
     <title>Agregar Rutina</title>
     <meta name="viewport" content="widt=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
-    <link rel="stylesheet" type="text/css" href="css/RegistroRutinas.css">
     <link rel="stylesheet" type="text/css" href="css/bootstrap.min.css">
+    <link rel="stylesheet" type="text/css" href="css/header.css">
+    <link rel="stylesheet" type="text/css" href="css/RegistroRutinas.css">
     <link media="all" type="text/css" rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.6.3/css/font-awesome.min.css">
     <link rel="stylesheet" href="librerias/bootstrap-datepicker/css/bootstrap-datepicker.css">
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
   </head>
   <body>
+  <?php
+  include "header.php" ?>
     <div class="container" id="main-container">
       <div class="row">
         <div class="col-md-6 col-md-offset-3">
@@ -101,12 +104,7 @@
         </div>
       </div>
     </div>
-    <footer>
-      <div class="container">
-        <p class="text-center">Create by <a href="http://www.facebook.com" rel="author">Wainer Rodriguez Bonilla</a> and  <a href="http://facebook.com" rel="author">Juan Gabriel Rosales</a>
-      </p>
-    </div>
-  </footer>
+    <?php include "footer.php" ?>
   <script src="js/jquery-3.2.1.min.js"></script>
   <script src="js/bootstrap.min.js"></script>
   <script src="js/RegistroRutina.js"></script>

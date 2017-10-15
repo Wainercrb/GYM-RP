@@ -12,6 +12,7 @@ a{color:inherit;text-decoration:none}
 .login-wrap{
     width:100%;
     margin:auto;
+    height: 110px;
     max-width:525px;
     min-height:670px;
     position:relative;
@@ -20,9 +21,9 @@ a{color:inherit;text-decoration:none}
 }
 .login-html{
     width:100%;
-    height:120%;
+    height: 110%;
     position:absolute;
-    padding:90px 70px 50px 70px;
+    padding:90px 70px 0px 70px;
     background:rgba(40,57,101,.9);
 }
 .login-html .sign-in-htm,
@@ -78,7 +79,7 @@ a{color:inherit;text-decoration:none}
 .login-form .group .input,
 .login-form .group .button{
     border:none;
-    padding:15px 20px;
+    padding:12px 17px;
     border-radius:25px;
     background:rgba(255,255,255,.1);
 }
@@ -151,4 +152,9 @@ a{color:inherit;text-decoration:none}
 }
 #combobox{
 	 color: black;
+}
+
+footer{
+    margin-top: 7em !important;
+    margin-bottom: 0em !important;
 }
