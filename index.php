@@ -58,19 +58,6 @@
 								<option value="value2" >Femenino</option>
 								<option value="value3">Desconocido</option>
 							</select>
-						</div>
-						<div class="group">
-							<label for="pass" class="label">Peso</label>
-							<input id="pass" type="password" class="input" data-type="text">
-						</div>
-						<div class="group">
-							<label for="pass" class="label">Altura</label>
-							<input id="pass" type="password" class="input" data-type="text">
-						</div>
-						<div class="group">
-							<label for="pass" class="label">Talla</label>
-							<input id="pass" type="password" class="input" data-type="text">
-						</div>
 						<div class="group">
 							<input  id="pass" type="submit" class="button" value="Registarse ">
 						</div>
@@ -83,5 +70,8 @@
 	</div>
 	<?php include "footer.php" ?>
 	<script language="JavaScript" type="text/javascript" src="js/direccionamiento.js"></script>
+	<script src="js/jquery-3.2.1.min.js"></script>
+  <script src="js/bootstrap.min.js"></script>
+  <script src="js/RegistroRutina.js"></script>
 </body>
 </html>
