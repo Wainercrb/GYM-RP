@@ -21,7 +21,7 @@ a{color:inherit;text-decoration:none}
 }
 .login-html{
     width:100%;
-    height: 110%;
+    height:140%;
     position:absolute;
     padding:90px 70px 0px 70px;
     background:rgba(40,57,101,.9);
@@ -157,4 +157,7 @@ a{color:inherit;text-decoration:none}
 footer{
     margin-top: 7em !important;
     margin-bottom: 0em !important;
+}
+#placeholder{
+   color :black; 
 }

@@ -46,18 +46,38 @@
 							<label for="pass" class="label">Contraseña</label>
 							<input id="pass" type="password" class="input" data-type="password">
 						</div>
-						
 						<div class="group">
-							<label for="pass" class="label">Email </label>
+							<label for="pass" class="label">Cedula </label>
 							<input id="pass" type="text" class="input">
 						</div>
 						<div class="group">
-							<label  id="pass"for="combobox" class="label">Sexo</label>
+							<label for="pass" class="label">Nombre </label>
+							<input id="pass" type="text" class="input">
+						</div>
+						<div class="group">
+							<label for="pass" class="label">Apellido 1 </label>
+							<input id="pass" type="text" class="input" placeholder="Apellido 1">
+						</div>
+						<div class="group">
+							<label for="pass" class="label">Apellido 2 </label>
+							<input id="pass" type="text" class="input" placeholder="Apellido 2">
+						</div>
+						<div class="group">
+						<label for="pass" class="label">Direccion</label>
+						<input  id="pass" type="text" class="input">
+						</div>
+						<div class="group">
+							<label for="pass" class="label">Telefono</label>
+							<input id="pass" type="text" class="input">
+						</div>
+						<div class="group">
+							<label  id="pass"for="combobox" class="label">Rol</label>
 							<select  id="combobox" class="input"name="select">
-								<option value="value1">Masculino</option>
-								<option value="value2" >Femenino</option>
-								<option value="value3">Desconocido</option>
+								<option value="value1">Admin</option>
+								<option value="value2" >Nutricionista</option>
+								<option value="value3">Entrenador</option>
 							</select>
+							<br>
 						<div class="group">
 							<input  id="pass" type="submit" class="button" value="Registarse ">
 						</div>
