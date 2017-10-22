@@ -21,7 +21,7 @@ if(isset($_POST["txtName"]) &&isset($_POST["txtSurnames"])  &&isset($_POST["txtA
         return;
     }
     $data = file_get_contents($_FILES['image']['tmp_name']);
-    $data = mysql_real_escape_string($data);
+    $data = mysqli_real_escape_string($data);
     $sql = "INSERT INTO usuario(nombre, apellidos, foto, direccion, usuario, genero, contrasenna, edad, cedula, telefono, email, altura, peso, cuello, hombros, pecho, cintura, antebrazo, muslo, pantorrillas, biceps, gluteos, cadera) VALUES (\"$_POST[txtName]\",\"$_POST[txtSurnames]\",'$data',\"$_POST[txtAdress]\",\"$_POST[txtUser]\",\"$_POST[cbGenero]\", \"$_POST[txtConfPass]\",\"$_POST[txtAge]\",\"$_POST[txtId]\",\"$_POST[txtPhone]\",\"$_POST[txtEmail]\",\"$_POST[txtHeight]\",\"$_POST[txtWeight]\" ,\"$_POST[txtNeck]\",\"$_POST[txtShoulders]\",\"$_POST[txtChest]\",\"$_POST[txtWaist]\",\"$_POST[txtForearms]\",\"$_POST[txtThigh]\",\"$_POST[txtCalves]\",\"$_POST[txtBiceps]\",\"$_POST[txtButtocks]\",\"$_POST[txtHips]\")";
     $query = $con->query($sql);
     if($query!=null)
