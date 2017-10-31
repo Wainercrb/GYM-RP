@@ -5,7 +5,7 @@
     <title>Agregar Rutina</title>
     <meta name="viewport" content="widt=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
     <link rel="stylesheet" type="text/css" href="css/bootstrap.min.css">
-    <link rel="stylesheet" type="text/css" href="css/header.css">
+    <link rel="stylesheet" type="text/css" href="css/headerFooter.css">
     <link rel="stylesheet" type="text/css" href="css/RegistroRutinas.css">
     <link media="all" type="text/css" rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.6.3/css/font-awesome.min.css">
     <link rel="stylesheet" href="librerias/bootstrap-datepicker/css/bootstrap-datepicker.css">
