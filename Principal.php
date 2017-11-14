@@ -1,4 +1,18 @@
 <!DOCTYPE html>
+<?php
+session_start();
+if (isset($_SESSION["ID"])) {
+    $id = $_SESSION["ID"];
+    $usuario = $_SESSION["USUARIO"];
+    $foto = $_SESSION["FOTO"];
+    $nombre = $_SESSION['NOMBRE'];
+    $apellidos = $_SESSION['APELLIDOS'];
+    $emil = $_SESSION['EMAIL'];
+} else {
+    die("error no se encontro un usuario");
+}
+?>
+
 <html lang="en">
     <head>
         <title>GTY-UTN</title>
@@ -11,23 +25,59 @@
         <div class="container-fluid">
             <div class="row">
                 <div class="col-md-3 col-sm-3 sidebar2">
-                    <div class="logo text-center">
-                        <img src="imagenes/usuario.png" class="img-responsive center-block" alt="Logo">
-                        <h4>USUARIO</h4>
+                    <div class="logo text-center" >
+                        <img src="data:image/jpeg;base64,<?php echo base64_encode($foto); ?>" class="img-responsive center-block" alt="Logo">
+                        <h1><?php echo $nombre . " " . $apellidos; ?></h1>
+                        <p><?php echo $emil; ?></p>
                     </div>
                     <br>
                     <div class="left-navigation">
-                        <ul class="list">
-                            <li><i class="fa fa-users" aria-hidden="true"></i></i >REGISTRO</li>
-                            <li><i class="fa fa-user" aria-hidden="true"></i>INGRESAR</li>
-                            <li><i class="fa fa-bar-chart" aria-hidden="true"></i>OBJETIVOS</li>
-                            <li><i class="fa fa-clock-o" aria-hidden="true"></i>MI HISTORIAL</li>
-                            <li><i class="fa fa-heart" aria-hidden="true"></i>NOSOTROS</li>
-                            <li><i class="fa fa-commenting-o" aria-hidden="true"></i>SUGERENCIAS</li>
-                            <li><i class="fa fa-times-circle" aria-hidden="true"></i>SALIR</li>
+                        <ul class="list" id="wainer">
+                            <?php
+                            if (isset($_SESSION["TIPOUSUARIO"]) && $_SESSION["TIPOUSUARIO"] === "trabajador") {
+                                ?>
+                               <li><a href="registroTrabajador.php"><i class="fa fa-users" aria-hidden="true"></i>     REGISTRO TRABAJADOR</a></li>
+                               <li><a href="registroUsuario.php"><i class="fa fa-users" aria-hidden="true"></i>     REGISTRO USUARIO</a></li>
+                               <li><a href="registroRutina.php"><i class="fa fa-users" aria-hidden="true"></i>     NUEVA RUTINA</a></li>
+                               <li><a href="mantenimintoUsuario.php"><i class="fa fa-users" aria-hidden="true"></i>     ADMINISTRAR USUARIO</a></li>
+                               <li><a href="registroTrabajador.php"><i class="fa fa-users" aria-hidden="true"></i>     ADMINISTRAR TRABAJADOR</a></li>
+                                <li><a href=""><i class="fa fa-times-circle" aria-hidden="true"></i>     SALIR</li>
+                                <style>
+
+                                    #wainer{
+                                        margin-top: 10%;
+
+                                    }
+
+                                </style>
+                                <?php
+                            } else if (isset($_SESSION["TIPOUSUARIO"]) && $_SESSION["TIPOUSUARIO"] === "user") {
+                                ?>
+                                <li><a href="registroUsuario.php"><i class="fa fa-bar-chart" aria-hidden="true"></i>OBJETIVOS</a></li>
+                                <li><a href="registroUsuario.php"><i class="fa fa-clock-o" aria-hidden="true"></i></i>MI HISTORIAL</a></li>
+                                <li><a href="registroUsuario.php"><i class="fa fa-heart" aria-hidden="true"></i></i>NOSOTROS</a></li>
+                                <li><a href="registroUsuario.php"><i class="fa fa-commenting-o" aria-hidden="true"></i></i>SUGERENCIAS</a></li>
+                                <li><a href="registroUsuario.php"><i class="fa fa-times-circle" aria-hidden="true"></i></i>SALIR</a></li>
+                                <style>
+
+                                    #wainer{
+                                        margin-top: 10%;
+
+                                    }
+
+                                </style>
+    <?php
+}
+?>
+
+
+
+
+
                         </ul>
                     </div>
                 </div>
+
                 <!--este div es la parte del de la información de la página-->
                 <div class="col-md-9 col-sm-8 main-content">
                     <h1 class="GYM-UTN">GYM-UTN

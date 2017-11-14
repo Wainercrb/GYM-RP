@@ -1,6 +1,17 @@
 <?php
+$postnames = array_keys($_POST);
+if (isset($_POST["editar"])) {
+    var_dump($_REQUEST["editar"]);
+    echo 'siiii';   
+}else if (isset($_POST["eliminar"])) {
+    var_dump($_REQUEST["eliminar"]);
+    echo 'nooo';
+}
+ 
+ return;
 
-if ($_SERVER['REQUEST_METHOD'] == "POST" and isset($_POST['btnRegistrarUsuario'])) {
+
+echo 'entro';
     if (isset($_POST["txtName"]) && isset($_POST["txtSurnames"]) && isset($_POST["txtAdress"]) && isset($_POST["txtId"]) && isset($_POST["txtPhone"]) && isset($_POST["txtEmail"]) && isset($_POST["txtUser"]) && isset($_POST["txtConfPass"]) && isset($_POST["txtAge"]) && isset($_POST["txtHeight"]) && isset($_POST["txtNeck"]) && isset($_POST["txtShoulders"]) && isset($_POST["txtChest"]) && isset($_POST["txtWaist"]) && isset($_POST["txtForearms"]) && isset($_POST["txtThigh"]) && isset($_POST["txtCalves"]) && isset($_POST["txtBiceps"]) && isset($_POST["txtButtocks"]) && isset($_POST["txtHips"])) {
         include '../Clases/Usuario.php';
         $usuario = new usuario();
@@ -37,5 +48,5 @@ if ($_SERVER['REQUEST_METHOD'] == "POST" and isset($_POST['btnRegistrarUsuario']
             }
         }
     }
-}
+
 ?>

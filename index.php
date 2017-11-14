@@ -2,7 +2,7 @@
 <html lang="">
     <head>
         <meta charset="utf-8">
-        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <meta name="viewport" content="widt=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
         <title>ingresar</title>
         <link rel="stylesheet" href="css/bootstrap.css">
         <link rel="stylesheet" href="css/headerFooter.css">
@@ -43,8 +43,8 @@
         </div>
     </div>
     <?php include "footer.php" ?>
-    <script language="JavaScript" type="text/javascript" src="js/MyJS/Login.js"></script>
     <script src="js/jquery-3.2.1.min.js"></script>
     <script src="js/bootstrap.min.js"></script>
+    <script language="JavaScript" type="text/javascript" src="js/MyJS/Login.js"></script>
 </body>
 </html>

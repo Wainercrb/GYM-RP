@@ -1,0 +1,37 @@
+body{
+    font-family: 'Raleway', sans-serif;
+    background:url(https://ae01.alicdn.com/kf/HTB1ZfvBQVXXXXaEXFXXq6xXFXXXg/3d-wallpaper-3d-murals-wallpaper-for-walls-3-d-Gym-mural-custom-Retro-nostalgia-board-sports.jpg) no-repeat center center fixed; 
+    -webkit-background-size: cover;
+    -moz-background-size: cover;
+    -o-background-size: cover;
+    background-size: cover;
+}
+
+.container{
+
+    height: 600px!important;
+}
+#mytable, #div-table{
+    background-color: #00ffff;
+}
+
+
+#form-buscar {
+    position: absolute;
+    left: 0;
+    right: 0;
+    margin: auto;  
+}
+#input-buscar{
+
+    border: 1px dotted #999;
+    height: 30px;
+    border-radius: 0;
+
+    -webkit-appearance: none;
+}
+#search-select{
+
+    height: 30px; 
+
+}
