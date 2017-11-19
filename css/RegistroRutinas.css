@@ -34,32 +34,21 @@ footer a:hover {
 #main-container{
     margin-top: 5%;
 }
-.flex-container {
-  
-    align-items: center;
-    display: flex;
-    justify-content: center;
-    flex-wrap: nowrap;
-}
-
-.flex-container>div {
-    
-
-    text-align: center;
-
-}
-
 #modal_size{
     width: 70% !important;
 }
-.custab{
-    border: 1px solid #ccc;
-    padding: 5px;
-    margin: 5% 0;
-    box-shadow: 3px 3px 2px #ccc;
-    transition: 0.5s;
-    }
-.custab:hover{
-    box-shadow: 3px 3px 0px transparent;
-    transition: 0.5s;
-    }
+table caption {
+	padding: .5em 0;
+}
+
+@media screen and (max-width: 767px) {
+  table caption {
+    border-bottom: 1px solid #ddd;
+  }
+}
+
+.p {
+  text-align: center;
+  padding-top: 140px;
+  font-size: 14px;
+}

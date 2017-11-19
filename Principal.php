@@ -36,14 +36,13 @@ if (isset($_SESSION["ID"])) {
                             <?php
                             if (isset($_SESSION["TIPOUSUARIO"]) && $_SESSION["TIPOUSUARIO"] === "trabajador") {
                                 ?>
-                               <li><a href="registroTrabajador.php"><i class="fa fa-users" aria-hidden="true"></i>     REGISTRO TRABAJADOR</a></li>
-                               <li><a href="registroUsuario.php"><i class="fa fa-users" aria-hidden="true"></i>     REGISTRO USUARIO</a></li>
-                               <li><a href="registroRutina.php"><i class="fa fa-users" aria-hidden="true"></i>     NUEVA RUTINA</a></li>
-                               <li><a href="mantenimintoUsuario.php"><i class="fa fa-users" aria-hidden="true"></i>     ADMINISTRAR USUARIO</a></li>
-                               <li><a href="registroTrabajador.php"><i class="fa fa-users" aria-hidden="true"></i>     ADMINISTRAR TRABAJADOR</a></li>
+                                <li><a href="registroTrabajador.php"><i class="fa fa-users" aria-hidden="true"></i>     REGISTRO TRABAJADOR</a></li>
+                                <li><a href="registroUsuario.php"><i class="fa fa-users" aria-hidden="true"></i>     REGISTRO USUARIO</a></li>
+                                <li><a href="registroRutina.php"><i class="fa fa-users" aria-hidden="true"></i>     NUEVA RUTINA</a></li>
+                                <li><a href="mantenimintoUsuario.php"><i class="fa fa-users" aria-hidden="true"></i>     ADMINISTRAR USUARIO</a></li>
+                                <li><a href="registroTrabajador.php"><i class="fa fa-users" aria-hidden="true"></i>     ADMINISTRAR TRABAJADOR</a></li>
                                 <li><a href=""><i class="fa fa-times-circle" aria-hidden="true"></i>     SALIR</li>
                                 <style>
-
                                     #wainer{
                                         margin-top: 10%;
 
@@ -54,7 +53,7 @@ if (isset($_SESSION["ID"])) {
                             } else if (isset($_SESSION["TIPOUSUARIO"]) && $_SESSION["TIPOUSUARIO"] === "user") {
                                 ?>
                                 <li><a href="registroUsuario.php"><i class="fa fa-bar-chart" aria-hidden="true"></i>OBJETIVOS</a></li>
-                                <li><a href="registroUsuario.php"><i class="fa fa-clock-o" aria-hidden="true"></i></i>MI HISTORIAL</a></li>
+                                <li><a href="MiHistorial.php"><i class="fa fa-clock-o" aria-hidden="true"></i></i>MI HISTORIAL</a></li>
                                 <li><a href="registroUsuario.php"><i class="fa fa-heart" aria-hidden="true"></i></i>NOSOTROS</a></li>
                                 <li><a href="registroUsuario.php"><i class="fa fa-commenting-o" aria-hidden="true"></i></i>SUGERENCIAS</a></li>
                                 <li><a href="registroUsuario.php"><i class="fa fa-times-circle" aria-hidden="true"></i></i>SALIR</a></li>
@@ -66,18 +65,12 @@ if (isset($_SESSION["ID"])) {
                                     }
 
                                 </style>
-    <?php
-}
-?>
-
-
-
-
-
+                                <?php
+                            }
+                            ?>
                         </ul>
                     </div>
                 </div>
-
                 <!--este div es la parte del de la información de la página-->
                 <div class="col-md-9 col-sm-8 main-content">
                     <h1 class="GYM-UTN">GYM-UTN

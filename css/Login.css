@@ -8,6 +8,11 @@ body{
 	background-size: cover;
 	font:600 16px/18px 'Open Sans',sans-serif;
 }
+footer{
+    
+    margin-top: 100px;
+
+}
 .login-wrap{
 
 	width:100%;
@@ -100,6 +105,6 @@ display: none;
 }
 #login-main-div{
     
-    margin-top: 5em;
+    margin-top: 10em;
     margin-bottom: 8em;
 }
