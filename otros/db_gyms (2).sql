@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Servidor: 127.0.0.1
--- Tiempo de generación: 01-11-2017 a las 00:49:21
+-- Tiempo de generación: 22-11-2017 a las 20:26:35
 -- Versión del servidor: 10.1.25-MariaDB
 -- Versión de PHP: 5.6.31
 
@@ -30,9 +30,13 @@ SET time_zone = "+00:00";
 
 CREATE TABLE `comida` (
   `id_comida` int(11) NOT NULL,
+  `id_usuario` int(11) NOT NULL,
   `tipo_comida` text,
   `estado` text,
-  `fecha` datetime DEFAULT NULL
+  `hora` text,
+  `fecha` date DEFAULT NULL,
+  `id_trabajador` int(11) DEFAULT NULL,
+  `detalles` text
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 -- --------------------------------------------------------
@@ -42,7 +46,7 @@ CREATE TABLE `comida` (
 --
 
 CREATE TABLE `gym_admin` (
-  `id_local_admin` int(11) NOT NULL,
+  `id_local_admin` bigint(20) UNSIGNED NOT NULL,
   `id_local` int(11) DEFAULT NULL,
   `id_admin` int(11) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
@@ -54,7 +58,7 @@ CREATE TABLE `gym_admin` (
 --
 
 CREATE TABLE `gym_pesona` (
-  `id_gym_persona` int(11) NOT NULL,
+  `id_gym_persona` bigint(20) UNSIGNED NOT NULL,
   `id_gym` int(11) NOT NULL,
   `id_persona` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
@@ -67,10 +71,8 @@ CREATE TABLE `gym_pesona` (
 
 CREATE TABLE `historial` (
   `id_historial` int(11) NOT NULL,
-  `id_usuario` int(11) NOT NULL,
-  `id_rutina` int(11) NOT NULL,
-  `id_comida` int(11) NOT NULL,
   `id_trabajador` int(11) NOT NULL,
+  `usuario` text,
   `peso` text,
   `altura` text,
   `cuello` text,
@@ -82,7 +84,8 @@ CREATE TABLE `historial` (
   `pantorrillas` text,
   `biceps` text,
   `gluteos` text,
-  `cadera` text
+  `cadera` text,
+  `fecha` date DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 -- --------------------------------------------------------
@@ -110,11 +113,14 @@ CREATE TABLE `locales` (
 
 CREATE TABLE `rutina` (
   `id_rutina` int(11) NOT NULL,
-  `tipo_rutina` text,
+  `lugar_tonificar` text CHARACTER SET latin1,
+  `equipo` text CHARACTER SET latin1,
+  `tipo_ejercicio` text CHARACTER SET latin1,
   `session` int(11) DEFAULT NULL,
   `repeticiones` int(11) DEFAULT NULL,
-  `fecha` datetime DEFAULT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+  `id_usuario` int(11) DEFAULT NULL,
+  `fecha` date DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_spanish_ci;
 
 -- --------------------------------------------------------
 
@@ -156,18 +162,8 @@ CREATE TABLE `usuario` (
   `cedula` text,
   `telefono` text,
   `email` text,
-  `altura` text,
-  `peso` text,
-  `cuello` text,
-  `hombros` text,
-  `pecho` text,
-  `cintura` text,
-  `antebrazo` text,
-  `muslo` text,
-  `pantorrillas` text,
-  `biceps` text,
-  `gluteos` text,
-  `cadera` text
+  `califico` text,
+  `estado` text
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 --
@@ -185,6 +181,7 @@ ALTER TABLE `comida`
 --
 ALTER TABLE `gym_admin`
   ADD PRIMARY KEY (`id_local_admin`),
+  ADD UNIQUE KEY `id_local_admin` (`id_local_admin`),
   ADD UNIQUE KEY `id_local` (`id_local`,`id_admin`),
   ADD KEY `gym_local_admin` (`id_admin`);
 
@@ -193,6 +190,7 @@ ALTER TABLE `gym_admin`
 --
 ALTER TABLE `gym_pesona`
   ADD PRIMARY KEY (`id_gym_persona`),
+  ADD UNIQUE KEY `id_gym_persona` (`id_gym_persona`),
   ADD KEY `id_gym` (`id_gym`,`id_persona`),
   ADD KEY `gym_persona_trabajdor` (`id_persona`);
 
@@ -201,10 +199,8 @@ ALTER TABLE `gym_pesona`
 --
 ALTER TABLE `historial`
   ADD PRIMARY KEY (`id_historial`),
-  ADD KEY `id_usuario` (`id_usuario`,`id_rutina`,`id_comida`,`id_trabajador`),
-  ADD KEY `historial_comida` (`id_trabajador`),
-  ADD KEY `historial` (`id_comida`),
-  ADD KEY `historial_rutina` (`id_rutina`);
+  ADD KEY `id_usuario` (`id_trabajador`),
+  ADD KEY `historial_comida` (`id_trabajador`);
 
 --
 -- Indices de la tabla `locales`
@@ -243,37 +239,37 @@ ALTER TABLE `comida`
 -- AUTO_INCREMENT de la tabla `gym_admin`
 --
 ALTER TABLE `gym_admin`
-  MODIFY `id_local_admin` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+  MODIFY `id_local_admin` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
 --
 -- AUTO_INCREMENT de la tabla `gym_pesona`
 --
 ALTER TABLE `gym_pesona`
-  MODIFY `id_gym_persona` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+  MODIFY `id_gym_persona` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
 --
 -- AUTO_INCREMENT de la tabla `historial`
 --
 ALTER TABLE `historial`
-  MODIFY `id_historial` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `id_historial` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=48;
 --
 -- AUTO_INCREMENT de la tabla `locales`
 --
 ALTER TABLE `locales`
-  MODIFY `id_local` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+  MODIFY `id_local` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
 --
 -- AUTO_INCREMENT de la tabla `rutina`
 --
 ALTER TABLE `rutina`
-  MODIFY `id_rutina` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `id_rutina` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=126;
 --
 -- AUTO_INCREMENT de la tabla `trabajador`
 --
 ALTER TABLE `trabajador`
-  MODIFY `id_trabajador` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
+  MODIFY `id_trabajador` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=8;
 --
 -- AUTO_INCREMENT de la tabla `usuario`
 --
 ALTER TABLE `usuario`
-  MODIFY `id_usuario` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=14;
+  MODIFY `id_usuario` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=24;
 --
 -- Restricciones para tablas volcadas
 --
@@ -282,25 +278,21 @@ ALTER TABLE `usuario`
 -- Filtros para la tabla `gym_admin`
 --
 ALTER TABLE `gym_admin`
-  ADD CONSTRAINT `gym_local_admin` FOREIGN KEY (`id_admin`) REFERENCES `trabajador` (`id_trabajador`),
-  ADD CONSTRAINT `gym_local_local` FOREIGN KEY (`id_local`) REFERENCES `locales` (`id_local`);
+  ADD CONSTRAINT `gym_admin_local` FOREIGN KEY (`id_local`) REFERENCES `locales` (`id_local`),
+  ADD CONSTRAINT `gym_admin_trabajador` FOREIGN KEY (`id_admin`) REFERENCES `trabajador` (`id_trabajador`) ON UPDATE CASCADE;
 
 --
 -- Filtros para la tabla `gym_pesona`
 --
 ALTER TABLE `gym_pesona`
   ADD CONSTRAINT `gym_persona_gym` FOREIGN KEY (`id_gym`) REFERENCES `locales` (`id_local`) ON UPDATE CASCADE,
-  ADD CONSTRAINT `gym_persona_trabajdor` FOREIGN KEY (`id_persona`) REFERENCES `trabajador` (`id_trabajador`) ON DELETE CASCADE,
-  ADD CONSTRAINT `gym_persona_usuario` FOREIGN KEY (`id_persona`) REFERENCES `usuario` (`id_usuario`) ON UPDATE CASCADE;
+  ADD CONSTRAINT `gym_persona_pesona` FOREIGN KEY (`id_persona`) REFERENCES `usuario` (`id_usuario`) ON UPDATE CASCADE;
 
 --
 -- Filtros para la tabla `historial`
 --
 ALTER TABLE `historial`
-  ADD CONSTRAINT `historial` FOREIGN KEY (`id_comida`) REFERENCES `comida` (`id_comida`),
-  ADD CONSTRAINT `historial_comida` FOREIGN KEY (`id_trabajador`) REFERENCES `trabajador` (`id_trabajador`) ON UPDATE CASCADE,
-  ADD CONSTRAINT `historial_rutina` FOREIGN KEY (`id_rutina`) REFERENCES `rutina` (`id_rutina`) ON UPDATE CASCADE,
-  ADD CONSTRAINT `historial_usuario` FOREIGN KEY (`id_usuario`) REFERENCES `usuario` (`id_usuario`) ON UPDATE CASCADE;
+  ADD CONSTRAINT `historial_trabajardor` FOREIGN KEY (`id_trabajador`) REFERENCES `trabajador` (`id_trabajador`) ON UPDATE CASCADE;
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
