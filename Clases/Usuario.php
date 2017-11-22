@@ -14,18 +14,6 @@ class usuario {
     private $cedula;
     private $telefono;
     private $mail;
-    private $altura;
-    private $peso;
-    private $cuello;
-    private $hombros;
-    private $pecho;
-    private $cintura;
-    private $antebrazo;
-    private $muzlo;
-    private $pantorrillas;
-    private $biceps;
-    private $gluteos;
-    private $cadera;
 
     function __construct() {
         $this->id_usuario = 0;
@@ -40,32 +28,26 @@ class usuario {
         $this->cedula = "";
         $this->telefono = "";
         $this->mail = "";
-        $this->altura = "";
-        $this->pecho = "";
-        $this->cuello = "";
-        $this->hombros = "";
-        $this->pecho = "";
-        $this->cintura = "";
-        $this->antebrazo = "";
-        $this->muzlo = "";
-        $this->pantorrillas = "";
-        $this->biceps = "";
-        $this->gluteos = "";
-        $this->cadera = "";
     }
 
     /**
      * Metodo guarda el trabador que recibe por interfaz a MySQL
      * @return string si es exito o no
      */
-    public function guardarUsuario() {
+    public function guardarUsuario($idLocal) {
         include "conexion.php";
         $data = file_get_contents($this->foto['tmp_name']);
         $data = mysql_real_escape_string($data);
-        $sql = "INSERT INTO usuario(nombre, apellidos, foto, direccion, usuario, genero, contrasenna, edad, cedula, telefono, email, altura, peso, cuello, hombros, pecho, cintura, antebrazo, muslo, pantorrillas, biceps, gluteos, cadera) VALUES ('$this->nombre','$this->apellidos','$data','$this->direccion','$this->usuario','$this->genero', '$this->contrasenna','$this->edad','$this->cedula','$this->telefono','$this->mail','$this->altura','$this->peso','$this->cuello','$this->hombros','$this->pecho','$this->cintura','$this->antebrazo','$this->muzlo','$this->pantorrillas','$this->biceps','$this->gluteos','$this->cadera')";
+        $sql = "INSERT INTO usuario(nombre, apellidos, foto, direccion, usuario, genero, contrasenna, edad, cedula, telefono, email,califico, estado) VALUES ('$this->nombre','$this->apellidos','$data','$this->direccion','$this->usuario','$this->genero', '$this->contrasenna','$this->edad','$this->cedula','$this->telefono','$this->mail', 'califico', 'activo')";
         if ($con->query($sql)) {
-            $con->close();
-            return "<script>alert(\"Bien. Su usuario se guardo correctamente ;-)\");window.location='../index.php';</script>";
+            $last_id = $con->insert_id;
+            $sql = "INSERT INTO gym_pesona(id_gym, id_persona) VALUES ('$idLocal','$last_id')";
+            if ($con->query($sql)) {
+                $con->close();
+                return "<script>alert(\"Bien. Procesa a agregar las medias inicales de este cliente:)\");window.location='../registroMedidas.php?id=$last_id';</script>";
+            } else {
+                return "<script>alert(\"Error al agregar el nuevo usuario :(. Detalles: " . mysqli_error($con) . "\");window.location='../RegistroGym.php';</script>";
+            }
         } else {
             return "<script>alert(\"Error description: " . mysqli_error($con) . "\");</script>";
         }
@@ -96,7 +78,7 @@ class usuario {
     public function cargarUsuario() {
         $state = false;
         include "conexion.php";
-        $sql = "SELECT * FROM usuario WHERE (usuario='$this->usuario' or email='$this->mail') and contrasenna='$this->contrasenna'";
+        $sql = "SELECT u.id_usuario, u.nombre, u.apellidos, u.edad,  u.foto, u.email, u.usuario, u.contrasenna, l.nombre as nombre_local, l.id_local FROM usuario u, locales l, gym_pesona gp WHERE gp.id_gym = l.id_local AND gp.id_persona = u.id_usuario AND (u.usuario='$this->usuario' or u.email='$this->mail') and u.contrasenna='$this->contrasenna';";
         if (!$query = $con->query($sql)) {
             echo("Error description: " . mysqli_error($con));
             return;
@@ -113,9 +95,40 @@ class usuario {
             $_SESSION['TIPOUSUARIO'] = "user";
             $_SESSION['EDAD'] = $row["edad"];
             $_SESSION["EDIT"] = "FALSE";
+            $_SESSION['IDTIENDA'] = $row["id_local"];
+            $_SESSION['NOMBRETIENDA'] = $row["nombre_local"];
             $state = true;
         }
         return $state;
+    }
+
+    public function voto($id_usuario) {
+        $state = "";
+        include "conexion.php";
+        $sql = "SELECT califico FROM usuario WHERE id_usuario = $id_usuario";
+        if (!$query = $con->query($sql)) {
+            die("Error description: " . mysqli_error($con));
+        }
+        while ($row = $query->fetch_array()) {
+            $state = $row["califico"];
+        }
+        return $state;
+    }
+
+    public function calificoTrue($id_usuario) {
+        include "conexion.php";
+        $sql = "UPDATE usuario SET califico='like' WHERE id_usuario = $id_usuario";
+        if (!$con->query($sql)) {
+            die("<script>alert(\"Error al agregar el local :(, detalles: " . mysqli_error($con) . "\");window.location='../MiHistorial.php';</script>");
+        }
+    }
+
+    public function calificoFalse($id_usuario) {
+        include "conexion.php";
+        $sql = "UPDATE usuario SET califico='deslike' WHERE id_usuario = $id_usuario";
+        if (!$con->query($sql)) {
+            die("<script>alert(\"Error al agregar el local :(, detalles: " . mysqli_error($con) . "\");window.location='../MiHistorial.php';</script>");
+        }
     }
 
     function getId_usuario() {
@@ -166,54 +179,6 @@ class usuario {
         return $this->mail;
     }
 
-    function getAltura() {
-        return $this->altura;
-    }
-
-    function getPeso() {
-        return $this->peso;
-    }
-
-    function getCuello() {
-        return $this->cuello;
-    }
-
-    function getHombros() {
-        return $this->hombros;
-    }
-
-    function getPecho() {
-        return $this->pecho;
-    }
-
-    function getCintura() {
-        return $this->cintura;
-    }
-
-    function getAntebrazo() {
-        return $this->antebrazo;
-    }
-
-    function getMuzlo() {
-        return $this->muzlo;
-    }
-
-    function getPantorrillas() {
-        return $this->pantorrillas;
-    }
-
-    function getBiceps() {
-        return $this->biceps;
-    }
-
-    function getGluteos() {
-        return $this->gluteos;
-    }
-
-    function getCatera() {
-        return $this->cadera;
-    }
-
     function setId_usuario($id_usuario) {
         $this->id_usuario = $id_usuario;
     }
@@ -260,54 +225,6 @@ class usuario {
 
     function setMail($mail) {
         $this->mail = $mail;
-    }
-
-    function setAltura($altura) {
-        $this->altura = $altura;
-    }
-
-    function setPeso($peso) {
-        $this->peso = $peso;
-    }
-
-    function setCuello($cuello) {
-        $this->cuello = $cuello;
-    }
-
-    function setHombros($hombros) {
-        $this->hombros = $hombros;
-    }
-
-    function setPecho($pecho) {
-        $this->pecho = $pecho;
-    }
-
-    function setCintura($cintura) {
-        $this->cintura = $cintura;
-    }
-
-    function setAntebrazo($antebrazo) {
-        $this->antebrazo = $antebrazo;
-    }
-
-    function setMuzlo($muzlo) {
-        $this->muzlo = $muzlo;
-    }
-
-    function setPantorrillas($pantorrillas) {
-        $this->pantorrillas = $pantorrillas;
-    }
-
-    function setBiceps($biceps) {
-        $this->biceps = $biceps;
-    }
-
-    function setGluteos($gluteos) {
-        $this->gluteos = $gluteos;
-    }
-
-    function setCatera($catera) {
-        $this->cadera = $catera;
     }
 
 }

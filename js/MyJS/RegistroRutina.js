@@ -59,11 +59,11 @@ function agregarEjercicio() {
     var tipo = document.getElementById("tipoEjercicio").value;
     var cuerpo = document.getElementById("tipoCuerpo").value;
     var maquina = document.getElementById("tipoMaquina").value;
-    cell1.innerHTML = '<input type="text" readonly id = "input-table" value=' + tipo + ' class="form-control" name="lugarTonificar[]" onclick="eliminarFilaRutina(this);" />';
-    cell2.innerHTML = '<input type="text" readonly id = "input-table" value=' + cuerpo + ' class="form-control" name="equipo[]" onclick="eliminarFilaRutina(this);"/>';
-    cell3.innerHTML = '<input type="text" readonly id = "input-table" value=' + maquina + ' class="form-control" name="tipo[]" onclick="eliminarFilaRutina(this);"/>';
-    cell4.innerHTML = '<input type="text" readonly id = "input-table" value=' + document.getElementById("txtSeries").value + ' class="form-control" name="series[]" onclick="eliminarFilaRutina(this);"/>';
-    cell5.innerHTML = '<input type="text" readonly id = "input-table" value=' + document.getElementById("txtRepeticiones").value + ' class="form-control" name="repeticiones[]" onclick="eliminarFilaRutina(this);"/>';
+    cell1.innerHTML = '<input type="text" style="width: 10em;" readonly id = "input-table" value= "' + tipo + '" class="form-control" name="tipo[]" onclick="eliminarFilaRutina(this);" />';
+    cell2.innerHTML = '<input type="text" style="width: 10em;" readonly id = "input-table" value= "' + cuerpo + '" class="form-control" name="lugarTonificar[]" onclick="eliminarFilaRutina(this);"/>';
+    cell3.innerHTML = '<input type="text" style="width: 10em;" readonly id = "input-table" value= "' + maquina + '" class="form-control" name="equipo[]" onclick="eliminarFilaRutina(this);"/>';
+    cell4.innerHTML = '<input type="text" readonly id = "input-table" value= "' + document.getElementById("txtSeries").value + '" class="form-control" name="series[]" onclick="eliminarFilaRutina(this);"/>';
+    cell5.innerHTML = '<input type="text" readonly id = "input-table" value= "' + document.getElementById("txtRepeticiones").value + '" class="form-control" name="repeticiones[]" onclick="eliminarFilaRutina(this);"/>';
 
 }
 
@@ -121,19 +121,19 @@ function grupoCompleto() {
             var cell11 = row.insertCell(10);
             var cell12 = row.insertCell(11);
             var cell13 = row.insertCell(12);
-            cell1.innerHTML = '<input  type="text" style="width: 7em;" id = "txt_usuario" value= ' + usuariosCargados[i] + ' class="form-control" name="md[]" />';
-            cell2.innerHTML = '<input  type="number" style="width: 7em;" step=0.01  id = "txt_altura" value= "" class="form-control" name="md[]" />';
-            cell3.innerHTML = '<input  type="number" style="width: 7em;" step=0.01  id = "txt_peso" value= "" class="form-control" name="md[]" />';
-            cell4.innerHTML = '<input  type="number" style="width: 7em;" step=0.01  id = "txt_cuello" value= "" class="form-control" name="md[]" />';
-            cell5.innerHTML = '<input  type="number" style="width: 7em;" step=0.01  id = "txt_hombros" value= "" class="form-control" name="md[]" />';
-            cell6.innerHTML = '<input  type="number" style="width: 7em;" step=0.01  id = "txt_pecho" value= "" class="form-control" name="md[]" />';
-            cell7.innerHTML = '<input  type="number" style="width: 7em;" step=0.01  id = "txt_cintura" value= "" class="form-control" name="md[]" />';
-            cell8.innerHTML = '<input  type="number" style="width: 7em;" step=0.01  id = "txt_antebrazo" value= "" class="form-control" name="md[]" />';
-            cell9.innerHTML = '<input  type="number" style="width: 7em;" step=0.01  id = "txt_muzlo" value= "" class="form-control" name="md[]" />';
-            cell10.innerHTML = '<input type="number" style="width: 7em;" step=0.01  id = "txt_pantorrilla" value= "" class="form-control" name="md[]" />';
-            cell11.innerHTML = '<input type="number" style="width: 7em;" step=0.01  id = "txt_biceps" value= "" class="form-control" name="md[]" />';
-            cell12.innerHTML = '<input type="number" style="width: 7em;" step=0.01  id = "txt_cluteos" value= "" class="form-control" name="md[]" />';
-            cell13.innerHTML = '<input type="number" style="width: 7em;" step=0.01  id = "txt_caera" value= "" class="form-control" name="md[]" />';
+            cell1.innerHTML = '<input  type="text" readonly style="width: 7em;" id = "txt_usuario" value= ' + usuariosCargados[i] + ' class="form-control" name="mdUsu[]" />';
+            cell2.innerHTML = '<input  type="number" style="width: 7em;" step=0.01  id = "txt_altura" value= "" class="form-control" name="mdAltura[]" />';
+            cell3.innerHTML = '<input  type="number" style="width: 7em;" step=0.01  id = "txt_peso" value= "" class="form-control" name="mdPeso[]" />';
+            cell4.innerHTML = '<input  type="number" style="width: 7em;" step=0.01  id = "txt_cuello" value= "" class="form-control" name="mdCuello[]" />';
+            cell5.innerHTML = '<input  type="number" style="width: 7em;" step=0.01  id = "txt_hombros" value= "" class="form-control" name="mdHombros[]" />';
+            cell6.innerHTML = '<input  type="number" style="width: 7em;" step=0.01  id = "txt_pecho" value= "" class="form-control" name="mdPecho[]" />';
+            cell7.innerHTML = '<input  type="number" style="width: 7em;" step=0.01  id = "txt_cintura" value= "" class="form-control" name="mdCintura[]" />';
+            cell8.innerHTML = '<input  type="number" style="width: 7em;" step=0.01  id = "txt_antebrazo" value= "" class="form-control" name="mdAntebrazo[]" />';
+            cell9.innerHTML = '<input  type="number" style="width: 7em;" step=0.01  id = "txt_muzlo" value= "" class="form-control" name="mdMuzlo[]" />';
+            cell10.innerHTML = '<input type="number" style="width: 7em;" step=0.01  id = "txt_pantorrilla" value= "" class="form-control" name="mdPantorrilla[]" />';
+            cell11.innerHTML = '<input type="number" style="width: 7em;" step=0.01  id = "txt_biceps" value= "" class="form-control" name="mdBiceps[]" />';
+            cell12.innerHTML = '<input type="number" style="width: 7em;" step=0.01  id = "txt_cluteos" value= "" class="form-control" name="mdGluteos[]" />';
+            cell13.innerHTML = '<input type="number" style="width: 7em;" step=0.01  id = "txt_cadera" value= "" class="form-control" name="mdCadera[]" />';
         }
 
     }
@@ -180,6 +180,6 @@ function eliminarFilaComida(btndel) {
         }
     }
 }
-}
+
 
 

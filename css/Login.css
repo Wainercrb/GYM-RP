@@ -1,110 +1,117 @@
 body{
-	margin:0;
-	color:#6a6f8c;
-	background-image:url(fondoLogin.jpg);
-	-webkit-background-size: cover;
-	-moz-background-size: cover;
-	-o-background-size: cover;
-	background-size: cover;
-	font:600 16px/18px 'Open Sans',sans-serif;
+    margin-top: 10% !important;
+    margin:0;
+    color:#6a6f8c;
+    background-image:url(fondoLogin.jpg);
+    -webkit-background-size: cover;
+    -moz-background-size: cover;
+    -o-background-size: cover;
+    background-size: cover;
+    font:600 16px/18px 'Open Sans',sans-serif;
+}
+.login-wrap{
+
+    margin-top: 50%;
+
+
 }
 footer{
-    
+
     margin-top: 100px;
 
 }
 .login-wrap{
 
-	width:100%;
-	margin:auto;
-	max-width:528px;
-	background:url(http://ignorelimits.com/wp-content/uploads/2015/01/full-body-workout-vs-split.jpg) no-repeat center;
-	-webkit-background-size: cover;
-	-moz-background-size: cover;
-	-o-background-size: cover;
-	background-size: cover;
-	font:600 16px/18px 'Open Sans',sans-serif;
+    width:100%;
+    margin:auto;
+    max-width:528px;
+    background:url(http://ignorelimits.com/wp-content/uploads/2015/01/full-body-workout-vs-split.jpg) no-repeat center;
+    -webkit-background-size: cover;
+    -moz-background-size: cover;
+    -o-background-size: cover;
+    background-size: cover;
+    font:600 16px/18px 'Open Sans',sans-serif;
 }
 .login-html{
 
-	width:100%;
-	height: 50%;
-	padding:15px 70px 0px 70px;
-	background:rgba(40,57,101,.9);
+    width:100%;
+    height: 50%;
+    padding:15px 70px 0px 70px;
+    background:rgba(40,57,101,.9);
 }
 .login-html .sign-in-htm,
 .login-html .sign-up-htm{
-	top:0;
-	left:0;
-	right:0;
-	bottom:0;
+    top:0;
+    left:0;
+    right:0;
+    bottom:0;
 }
 .login-form{
-	position:relative;
-	perspective:1000px;
-	transform-style:preserve-3d;
+    position:relative;
+    perspective:1000px;
+    transform-style:preserve-3d;
 }
 .login-form .group{
- 
-	margin-bottom:15px;
+
+    margin-bottom:15px;
 }
 .login-form .group .label,
 .login-form .group .input,
 .login-form .group .button{
-	width:100%;
-	color:#fff;
-	display:block;
+    width:100%;
+    color:#fff;
+    display:block;
 }
 .login-form .group .input,
 .login-form .group .button{
-	border:none;
-	padding:8px 12px;
-	border-radius:25px;
-	background:rgba(255,255,255,.1);
+    border:none;
+    padding:8px 12px;
+    border-radius:25px;
+    background:rgba(255,255,255,.1);
 }
 .login-form .group input[data-type="password"]{
-	text-security:circle;
-	-webkit-text-security:circle;
+    text-security:circle;
+    -webkit-text-security:circle;
 }
 .login-form .group .label{
-	color:#aaa;
-	font-size:12px;
+    color:#aaa;
+    font-size:12px;
 }
 .login-form .group .button{
-	background:#1161ee;
+    background:#1161ee;
 }
 .login-form .group label .icon{
-	width:15px;
-	height:15px;
-	border-radius:2px;
-	position:relative;
-	display:inline-block;
-	background:rgba(255,255,255,.1);
+    width:15px;
+    height:15px;
+    border-radius:2px;
+    position:relative;
+    display:inline-block;
+    background:rgba(255,255,255,.1);
 }
 #title-form{
-	color: #fff;
+    color: #fff;
 }
 #combobox{
-	 color: black;
+    color: black;
 }
 #blah {
 
-/* 50% 50% centers image in div */
-background-size: auto 110%;
-/* Interchange this value depending on prefering width vs. height */
-width: 10em !important;
-height: 9em !important;
-cursor: pointer !important;
-border: 1px solid black;
+    /* 50% 50% centers image in div */
+    background-size: auto 110%;
+    /* Interchange this value depending on prefering width vs. height */
+    width: 10em !important;
+    height: 9em !important;
+    cursor: pointer !important;
+    border: 1px solid black;
 }
 input[type="file"] {
-display: none;
+    display: none;
 }
 #resetPassword{
     text-align: center;
 }
 #login-main-div{
-    
+
     margin-top: 10em;
     margin-bottom: 8em;
 }

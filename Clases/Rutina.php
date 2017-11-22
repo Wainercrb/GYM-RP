@@ -26,6 +26,7 @@ class Rutina {
         include "conexion.php";
         $sql = "INSERT INTO rutina(lugar_tonificar, equipo, tipo_ejercicio, session, repeticiones, id_usuario, fecha) VALUES ('$this->lugar_tonificar','$this->equipo','$this->tipo_ejercicio','$this->sessiones','$this->repeticiones','$this->usuario', NOW())";
         if ($con->query($sql) === FALSE) {
+            echo mysqli_error($con);
             die("<script>alert(\"Error description: " . mysqli_error($con) . "\");</script>");
         }
     }

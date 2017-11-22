@@ -9,10 +9,6 @@
         <link rel="stylesheet" href="css/Login.css">
     </head>
     <body>
-        <?php
-        include './php/InfoNavbar.php';
-        include "./header.php";
-        ?>
         <div class="login-wrap">
             <div class="login-html">
                 <div class="login-form">
@@ -31,6 +27,9 @@
                                 <br>
                                 <div class="group">
                                     <h1 id="resetPassword"> <a  href="CambioContrasenna.php"> ¿has olvidado tu contraseña ?</a></h1>
+                                </div>
+                                <div class="group">
+                                    <h5 id="resetPassword"> <a  href="gimnasios.php"> ¿ver gimnasios asociados ?</a></h5>
                                 </div>
                                 <div class="group">
                                     <input id="pass" type="submit" class="button" name="btnLogin" value="Ingresar">

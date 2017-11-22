@@ -73,58 +73,6 @@
                             <input id="txtConfPass" type="password" name="txtConfPass" class="input" data-type="password" 	REQUIRED>
                         </div>
                         <div class="group">
-                            <label for= "" class="label">Altura </label>
-                            <input id="txtHeight" type="number" step=0.01 name="txtHeight" class="input" REQUIRED>
-                        </div>
-                        <div class="group">
-                            <label for= "" class="label">Peso </label>
-                            <input id="txtWeight" type="number" step=0.01 name="txtWeight" class="input" REQUIRED>
-                        </div>
-                        <div class="group">
-                            <label for="" class="label">cuello</label>
-                            <input id="txtNeck" type="number" step=0.01 name="txtNeck" class="input" REQUIRED>
-                        </div>
-                        <div class="group">
-                            <label for="" class="label">Hombros</label>
-                            <input id="txtShoulders" type="number" step=0.01 name="txtShoulders" class="input" REQUIRED>
-                        </div>
-                        <div class="group">
-                            <label for="" class="label">Pecho</label>
-                            <input id="txtChest" type="number" step=0.01 name="txtChest" class="input" REQUIRED>
-                        </div>
-                        <div class="group">
-                            <label for="" class="label">Cintura</label>
-                            <input id="txtWaist" type="number" step=0.01 name="txtWaist" class="input" REQUIRED>
-                        </div>
-                        <div class="group">
-                            <label for="" class="label">Antebrazos</label>
-                            <input id="txtForearms" type="number" step=0.01 name="txtForearms" class="input" REQUIRED>
-                        </div>
-                        <div class="group">
-                            <label for="" class="label">Muzlo</label>
-                            <input id="txtThigh" type="number" step=0.01 name="txtThigh" class="input" REQUIRED>
-                        </div>
-                        <div class="group">
-                            <label for="" class="label">Pantorillas</label>
-                            <input id="txtCalves" type="number" step=0.01 name="txtCalves" class="input" REQUIRED>
-                        </div>
-                        <div class="group">
-                            <label for="" class="label">Bíceps</label>
-                            <input id="txtBiceps" type="number" step=0.01 name="txtBiceps" class="input" REQUIRED >
-                        </div>
-                        <div class="group">
-                            <label for="" class="label">Gluteos</label>
-                            <input id="txtButtocks" type="number" step=0.01 name="txtButtocks" class="input" REQUIRED>
-                        </div>
-                        <div class="group">
-                            <label for="" class="label">Cadera</label>
-                            <input id="txtHips" type="number" step=0.01 name="txtHips" class="input" REQUIRED >
-                        </div>
-                        <div class="group">
-                            <label for="" class="label">Masa Corporal</label>
-                            <input id="txtMusleMass" type="number" class="input">
-                        </div>
-                        <div class="group">
                             <input  id="pass" type="submit"  class="button" value="Registarse">
                         </div>
                     </div>
@@ -135,6 +83,6 @@
     <?php include "footer.php" ?>
     <script type="text/javascript" src="js/jquery.js"></script>
     <script type="text/javascript" src="js/bootstrap.min.js"></script>
-    <script type="text/javascript" src="js/registroUsuario.js"></script>
+    <script type="text/javascript" src="js/MyJS/registroUsuario.js"></script>
 </body>
 </html>

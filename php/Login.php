@@ -1,7 +1,6 @@
 <?php
 
 if (isset($_POST["txtUsuario"]) && isset($_POST["txtContrasenna"])) {
-    echo 'entro';
     include "../Clases/Usuario.php";
     $obj = new usuario();
     $obj->setUsuario($_REQUEST['txtUsuario']);

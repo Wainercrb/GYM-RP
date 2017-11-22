@@ -71,9 +71,9 @@ class trabajador {
     public function cargarTrabajador() {
         $state = false;
         include "conexion.php";
-        $sql = "SELECT * FROM trabajador WHERE (usuario = '$this->usuario' or email='$this->email') and contrasenna='$this->contrasenna' and (rol = 'Admin' or rol = 'Nutricionista' or rol = 'Entrenador')";
+        $sql = "SELECT t.id_trabajador, t.nombre, t.apellidoUno, t.apellidoDos, t.foto, t.email, t.usuario, t.contrasenna,l.nombre as nombre_local, l.id_local FROM trabajador t, locales l, gym_admin gd WHERE gd.id_local = l.id_local AND gd.id_admin = t.id_trabajador AND (t.usuario = '$this->usuario' or t.email='$this->email') and t.contrasenna='$this->contrasenna' and (t.rol = 'Admin' or t.rol = 'Nutricionista' or t.rol = 'Entrenador')";
         if (!$query = $con->query($sql)) {
-            echo("Error description al cargar el trabajador :(..Detalles: " . mysqli_error($con));
+            die("Error description al cargar el trabajador :(..Detalles: " . mysqli_error($con));
             return;
         }
         while ($row = $query->fetch_array()) {
@@ -86,8 +86,11 @@ class trabajador {
             $_SESSION['USUARIO'] = $row["usuario"];
             $_SESSION['CONTRASENNA'] = $row["contrasenna"];
             $_SESSION['TIPOUSUARIO'] = "trabajador";
+            $_SESSION['IDTIENDA'] = $row["id_local"];
+            $_SESSION['NOMBRETIENDA'] = $row["nombre_local"];
             $_SESSION["EDIT"] = "FALSE";
-            $state = true;
+            $_SERVER["wianer"] = "wainer";
+            $state = true;;
         }
         return $state;
     }

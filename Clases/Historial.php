@@ -4,7 +4,7 @@ class Historial {
 
     private $id_historial;
     private $id_trabajador;
-    private $id_usuario;
+    private $usuario;
     private $peso;
     private $cuello;
     private $alura;
@@ -17,11 +17,12 @@ class Historial {
     private $biceps;
     private $gluteos;
     private $cadera;
+    private $fecha;
 
     function __construct() {
         $this->id_historial = 0;
         $this->id_trabajador = 0;
-        $this->id_usuario = 0;
+        $this->usuario = "";
         $this->peso = 0;
         $this->alura = 0;
         $this->cuello = 0;
@@ -34,15 +35,35 @@ class Historial {
         $this->biceps = 0;
         $this->gluteos = 0;
         $this->cadera = 0;
+        $this->fecha = 0;
     }
 
     public function guardar() {
         include "conexion.php";
-        $sql = "INSERT INTO historial(id_usuario, id_trabajador, peso, altura, cuello, hombros, pecho, cintura, antebrazo, muslo, pantorrillas, biceps, gluteos, cadera) VALUES ('$this->id_usuario','$this->id_trabajador','$this->peso','$this->alura','$this->cuello','$this->hombros','$this->pecho','$this->cintura','$this->antebrazo','$this->muzlo','$this->pantorrillas','$this->biceps','$this->gluteos','$this->cadera')";
+        $sql = "INSERT INTO historial(id_trabajador, usuario, peso, altura, cuello, hombros, pecho, cintura, antebrazo, muslo, pantorrillas, biceps, gluteos, cadera, fecha) VALUES ('$this->id_trabajador','$this->usuario','$this->peso','$this->alura','$this->cuello','$this->hombros','$this->pecho','$this->cintura','$this->antebrazo','$this->muzlo','$this->pantorrillas','$this->biceps','$this->gluteos','$this->cadera', NOW())";
         if ($con->query($sql) === FALSE) {
             die("<script>alert(\"Error description: " . mysqli_error($con) . "\");</script>");
         }
     }
+
+    public function guardarMedidas() {
+        include "conexion.php";
+        $sql = "INSERT INTO historial(id_trabajador, usuario, peso, altura, cuello, hombros, pecho, cintura, antebrazo, muslo, pantorrillas, biceps, gluteos, cadera, fecha) VALUES ('$this->id_trabajador','$this->usuario','$this->peso','$this->alura','$this->cuello','$this->hombros','$this->pecho','$this->cintura','$this->antebrazo','$this->muzlo','$this->pantorrillas','$this->biceps','$this->gluteos','$this->cadera', NOW())";
+        if ($con->query($sql) === FALSE) {
+            die("<script>alert(\"Error description: " . mysqli_error($con) . "\");</script>");
+        } else {
+            print "<script>alert(\"Bien. Medias agregadas correctamante\");window.location='../Principal.php';</script>";
+        }
+    }
+
+    function getFecha() {
+        return $this->fecha;
+    }
+
+    function setFecha($fecha) {
+        $this->fecha = $fecha;
+    }
+
     function getCuello() {
         return $this->cuello;
     }
@@ -51,7 +72,6 @@ class Historial {
         $this->cuello = $cuello;
     }
 
-    
     function getId_historial() {
         return $this->id_historial;
     }
@@ -60,12 +80,12 @@ class Historial {
         return $this->id_trabajador;
     }
 
-    function getId_usuario() {
-        return $this->id_usuario;
+    function getUsuario() {
+        return $this->usuario;
     }
 
-    function getPeso() {
-        return $this->peso;
+    function setUsuario($usuario) {
+        $this->usuario = $usuario;
     }
 
     function getAlura() {

@@ -8,6 +8,8 @@ class Comida {
     private $hora;
     private $fecha;
     private $id_trabajador;
+    private $id_usuario;
+    private $detalles;
 
     function __construct() {
         $this->id_comida = 0;
@@ -16,14 +18,32 @@ class Comida {
         $this->hora = "";
         $this->fecha = "";
         $this->id_trabajador = 0;
+        $this->id_usuario = 0;
+        $this->detalles = "";
     }
 
     public function guardar() {
         include "conexion.php";
-        $sql = "INSERT INTO comida(tipo_comida, estado, hora, fecha, id_trabajador) VALUES ('$this->id_comida','pendiente','$this->hora','$this->fecha','$this->id_trabajador')";
+        $sql = "INSERT INTO comida(id_usuario, tipo_comida, estado, hora, fecha, id_trabajador, detalles) VALUES ('$this->id_usuario', '$this->nombre','pendiente','$this->hora','$this->fecha','$this->id_trabajador', '$this->detalles')";
         if ($con->query($sql) === FALSE) {
             die("<script>alert(\"Error description: " . mysqli_error($con) . "\");</script>");
         }
+    }
+
+    function getId_usuario() {
+        return $this->id_usuario;
+    }
+
+    function setId_usuario($id_usuario) {
+        $this->id_usuario = $id_usuario;
+    }
+
+    function getDetalles() {
+        return $this->detalles;
+    }
+
+    function setDetalles($detalles) {
+        $this->detalles = $detalles;
     }
 
     function getId_trabajador() {

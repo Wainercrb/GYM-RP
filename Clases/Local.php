@@ -32,20 +32,21 @@ class local {
         include "conexion.php";
         $data = file_get_contents($this->foto['tmp_name']);
         $data = mysql_real_escape_string($data);
-        $sql = "INSERT INTO locales(nombre, telefono, email, puntuacionMas, puntuacionMenos, latitud, longitud) VALUES ('$this->nombre','$this->telefono','$this->email','$this->puntuacionMas', '$this->puntuacionMenos','$this->latitud','$this->longitud')";
+        $sql = "INSERT INTO locales(nombre, telefono, email, puntuacionMas, puntuacionMenos, latitud, longitud) VALUES ('$this->nombre','$this->telefono','$this->email','0','0','$this->latitud','$this->longitud')";
         if ($con->query($sql)) {
             $last_id = $con->insert_id;
             $sql = "INSERT INTO gym_admin(id_local, id_admin) VALUES ('$last_id','$idAdministrador')";
             if ($con->query($sql)) {
                 $con->close();
-              return "<script>alert(\"Bien. Nuevo local agregado correctamente :)\");window.location='../RegistroGym.php';</script>";
+                return "<script>alert(\"Bien. Nuevo local agregado correctamente :)\");window.location='../RegistroGym.php';</script>";
             } else {
                 return "<script>alert(\"Error al agregar el local :(, detalles: " . mysqli_error($con) . "\");window.location='../RegistroGym.php';</script>";
             }
         } else {
-         return "<script>alert(\"Error al agregar el local :(, detalles: " . mysqli_error($con) . "\");window.location='../RegistroGym.php';</script>";
+            return "<script>alert(\"Error al agregar el local :(, detalles: " . mysqli_error($con) . "\");window.location='../RegistroGym.php';</script>";
         }
     }
+
     /**
      * Metodo verifica si hay un local con el correo o usuario ya registrado en la base de datos
      * @return boolean true si hay datos igules, false si no hay concidencia
@@ -90,6 +91,43 @@ class local {
             $state = true;
         }
         return $state;
+    }
+
+    public function editarLike($id_local) {
+        include "conexion.php";
+        $sql = "UPDATE locales SET puntuacionMas = '$this->puntuacionMas'  WHERE id_local = $id_local";
+        if (!$con->query($sql)) {
+            $con->close();
+            die("<script>alert(\"Error al aagregar la calificacion del gym :(, detalles: " . mysqli_error($con) . "\");window.location='../MiHistorial.php';</script>");
+        }
+    }
+
+    public function editarDeslike($id_local) {
+
+        include "conexion.php";
+        $sql = "UPDATE locales SET puntuacionMenos = '$this->puntuacionMenos'  WHERE id_local = $id_local";
+        if (!$con->query($sql)) {
+            $con->close();
+            die("<script>alert(\"Error al aagregar la calificacion del gym :(, detalles: " . mysqli_error($con) . "\");window.location='../MiHistorial.php';</script>");
+        }
+    }
+
+    public function quitarLike($id_local, $puntualcion) {
+        include "conexion.php";
+        $sql = "UPDATE locales SET puntuacionMas = '$puntualcion'  WHERE id_local = $id_local";
+        if (!$con->query($sql)) {
+            $con->close();
+            die("<script>alert(\"Error al aagregar la calificacion del gym :(, detalles: " . mysqli_error($con) . "\");window.location='../MiHistorial.php';</script>");
+        }
+    }
+
+    public function quitarDeslike($id_local, $puntuacion) {
+        include "conexion.php";
+        $sql = "UPDATE locales SET puntuacionMenos = '$puntuacion'  WHERE id_local = $id_local";
+        if (!$con->query($sql)) {
+            $con->close();
+            die("<script>alert(\"Error al aagregar la calificacion del gym :(, detalles: " . mysqli_error($con) . "\");window.location='../MiHistorial.php';</script>");
+        }
     }
 
     function getPuntuacionMas() {
