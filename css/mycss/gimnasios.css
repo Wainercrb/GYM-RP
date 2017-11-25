@@ -1,0 +1,62 @@
+body{
+    background-image: url("http://getwallpapers.com/wallpaper/full/4/3/9/200434.jpg");
+    color: white;
+   
+    font-family: 'Raleway', sans-serif;
+    background-color: black;
+    background-size: cover;
+    background-repeat: no-repeat;
+}
+h1{
+    font-size: 45px;
+    width: 100%;
+    text-align: center;
+    font-weight: bold;
+    color:black;
+    margin-bottom: 40px;
+    color: #000;
+    text-shadow: 0 2px 3px #555555;
+    font-family: Tahoma;
+}
+
+
+#map_container{
+    position: relative;
+}
+#map{
+    height: 0;
+    overflow: hidden;
+    padding-bottom: 22.25%;
+
+
+    position: relative;
+}
+#container{
+    margin-top: 5% !important;
+}
+.my-group .form-control{
+    width:50%;
+}tr th{
+    font-weight:bold;
+}
+tr th, tr td{
+    padding:5px;
+}
+th{
+    border: 5px solid #C1DAD7;
+}
+td{
+    border: 5px solid #C1DAD7;
+}
+.c1{
+    background:#4b8c74;
+}
+.c2{
+    background:#74c476;
+}
+.c3{
+    background:#a4e56d;
+}
+.c4{
+    background:#cffc83;
+}
