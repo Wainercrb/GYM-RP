@@ -42,6 +42,7 @@ if (isset($_SESSION["ID"])) {
                                 <li><a href="registroRutina.php"><i class="fa fa-users" aria-hidden="true"></i>     NUEVA RUTINA</a></li>
                                 <li><a href="mantenimintoUsuario.php"><i class="fa fa-users" aria-hidden="true"></i>     ADMINISTRAR USUARIO</a></li>
                                 <li><a href="registroTrabajador.php"><i class="fa fa-users" aria-hidden="true"></i>     ADMINISTRAR TRABAJADOR</a></li>
+                                <li><a href="mantenimintoHistorial.php"><i class="fa fa-users" aria-hidden="true"></i>     ADMINISTRAR MEDIDAS</a></li>
                                 <li><a href="index.php"><i class="fa fa-times-circle" aria-hidden="true"></i>     SALIR</li>
                                 <style>
                                     #wainer{

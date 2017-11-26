@@ -31,6 +31,25 @@ class Rutina {
         }
     }
 
+    public function eliminarRutina() {
+        include "conexion.php";
+        $sql = "DELETE FROM `rutina` WHERE id_rutina = $this->id_rutina";
+        if ($con->query($sql) === FALSE) {
+            die("<script>alert(\"Error description: " . mysqli_error($con) . "\");</script>");
+        } else if (true) {
+            print "<script>alert(\"Bien. Rutina eliminada\");window.location='../mantenimintoHistorial.php';</script>";
+        }
+    }
+     public function actualizarRutina() {
+        include "conexion.php";
+        $sql = "UPDATE `rutina` SET `lugar_tonificar`= '$this->lugar_tonificar',`equipo`='$this->equipo',`tipo_ejercicio`='$this->tipo_ejercicio',`session`='$this->sessiones',`repeticiones`='$this->repeticiones',`fecha`= '$this->fecha' WHERE id_rutina = $this->id_rutina";
+        if ($con->query($sql) === FALSE) {
+            die("<script>alert(\"Error description: " . mysqli_error($con) . "\");</script>");
+        } else if (true) {
+            print "<script>alert(\"Bien. Rutina actualizada\");window.location='../mantenimintoHistorial.php';</script>";
+        }
+    }
+
     function getUsuario() {
         return $this->usuario;
     }

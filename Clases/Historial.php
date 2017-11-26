@@ -56,6 +56,26 @@ class Historial {
         }
     }
 
+    public function eliminarHistorial() {
+        include "conexion.php";
+        $sql = "DELETE FROM `historial` WHERE id_historial= $this->id_historial";
+        if ($con->query($sql) === FALSE) {
+            die("<script>alert(\"Error description: " . mysqli_error($con) . "\");</script>");
+        } else if (true) {
+            print "<script>alert(\"Bien. Historial eliminada\");window.location='../mantenimintoHistorial.php';</script>";
+        }
+    }
+
+    public function actualizarHistorial() {
+        include "conexion.php";
+        $sql = "UPDATE `historial` SET `peso`='$this->peso',`altura`='$this->alura',`cuello`='$this->cuello',`hombros`= '$this->hombros',`pecho`='$this->pecho',`cintura`='$this->cintura',`antebrazo`='$this->antebrazo',`muslo`='$this->muzlo',`pantorrillas`='$this->pantorrillas',`biceps`='$this->biceps',`gluteos`='$this->gluteos',`cadera`='$this->cadera',`fecha`='$this->fecha' WHERE id_historial = $this->id_historial";
+        if ($con->query($sql) === FALSE) {
+            die("<script>alert(\"Error description: " . mysqli_error($con) . "\");</script>");
+        } else if (true) {
+            print "<script>alert(\"Bien. Comida actualizada\");window.location='../mantenimintoHistorial.php';</script>";
+        }
+    }
+
     function getFecha() {
         return $this->fecha;
     }
