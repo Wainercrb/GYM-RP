@@ -1,4 +1,10 @@
 <!DOCTYPE html>
+<?php
+if (!isset($_SESSION)) {
+    session_start();
+    session_destroy();
+}
+?>
 <html lang="">
     <head>
         <meta charset="utf-8">

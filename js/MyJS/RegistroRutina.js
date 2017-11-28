@@ -64,7 +64,8 @@ function agregarEjercicio() {
     cell3.innerHTML = '<input type="text" style="width: 10em;" readonly id = "input-table" value= "' + maquina + '" class="form-control" name="equipo[]" onclick="eliminarFilaRutina(this);"/>';
     cell4.innerHTML = '<input type="text" readonly id = "input-table" value= "' + document.getElementById("txtSeries").value + '" class="form-control" name="series[]" onclick="eliminarFilaRutina(this);"/>';
     cell5.innerHTML = '<input type="text" readonly id = "input-table" value= "' + document.getElementById("txtRepeticiones").value + '" class="form-control" name="repeticiones[]" onclick="eliminarFilaRutina(this);"/>';
-
+    document.getElementById("txtSeries").value = 0;
+    document.getElementById("txtRepeticiones").value = 0;
 }
 
 
@@ -141,12 +142,15 @@ function grupoCompleto() {
 
 
 function anadirColumnaComida() {
+    if (document.getElementById('tblGrid').rows.length === 1) {
+        alert("No hay usuarios para esta rutina");
+        return;
+    }
     var cantidad = document.getElementById("txtCantidadComida").value;
     var comida = document.getElementById("tipoComida").value;
     var hora = document.getElementById("txtTiempo").value;
     var fecha = document.getElementById("txtFecha").value;
     var detalles = document.getElementById("txtDetalle").value;
-    alert(hora);
     if (cantidad <= 0 || comida === "" || hora === "" || !Date.parse(fecha) || detalles === "") {
         alert("Error :( Verifica los datos de las comidas");
         return;
@@ -163,10 +167,11 @@ function anadirColumnaComida() {
     cell3.innerHTML = '<input type="text" style="width: 6em;" readonly id = "input-table" value="' + hora + '" class="form-control" name="horaC[]" onclick="eliminarFilaComida(this);" />';
     cell4.innerHTML = '<input type="text" style="width: 7em;" readonly id = "input-table" value="' + fecha + '" class="form-control" name="fechaC[]" onclick="eliminarFilaComida(this);" />';
     cell5.innerHTML = '<input type="text" style="width: 25em;" readonly id = "input-table" value= "' + detalles + '" class="form-control" name="detalle[]" onclick="eliminarFilaComida(this);" />';
-    cantidad.value = "";
-    detalles.value = "";
-    hora.value = "";
-    fecha.value = "";
+    var cantidad = document.getElementById("txtCantidadComida").value = "";
+    var comida = document.getElementById("tipoComida").value = "";
+    document.getElementById("txtTiempo").value = "";
+    document.getElementById("txtFecha").value = "";
+    document.getElementById("txtDetalle").value = "";
 }
 
 

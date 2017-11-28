@@ -83,6 +83,9 @@
                 <h1 class="text-center">Rutinas registradas</h1>
                 <?php
                 $fecha = "";
+                if (isset($_GET["fc"])) {
+                    $fecha = $_GET["fc"];
+                } else
                 if (isset($_POST['txtFecha'])) {
                     $fecha = $_POST['txtFecha'];
                 } else {
@@ -152,19 +155,23 @@
                     $ctComida++;
                     ?>
                     <div class="col-lg-3 col-md-3 col-sm-6 col-xs-12" >
-                        <div class="my-list center-block text-center">
-                            <img id="div100" src="ejercicios/<?php echo $row['tipo_comida']; ?>.jpg" />
-                            <h3 class="text-center"></h3>
-                            <span><?php echo 'Tipo comida: ' . $row['tipo_comida']; ?></span>
-                            <span><?php echo 'Estado: ' . $row['estado']; ?></span>
-                            <div class="offer"><?php echo 'Fecha: ' . $row['fecha']; ?></div>
-                            <div class="detail">
-                                <p> <?php echo $row['detalles']; ?> </p>
-                                <img src="ejercicios/<?php echo $row['tipo_comida']; ?>.jpg" alt="dsadas" />
-                                <a href="#" class="btn btn-info">----</a>
-                                <a href="#" class="btn btn-info">---</a>
+                        <form name="frmActualizarComida" action="php/registroComida.php" method="POST" enctype="multipart/form-data">
+                            <div class="my-list center-block text-center">
+                                <img id="div100" src="ejercicios/<?php echo $row['tipo_comida']; ?>.jpg" />
+                                <span><?php echo 'Tipo comida: ' . $row['tipo_comida']; ?></span>
+                                <span><?php echo 'Estado: ' . $row['estado']; ?></span>
+                                <div class="offer"><?php echo 'Fecha: ' . $row['fecha']; ?></div>
+                                <div class="detail">
+                                    <p> <?php echo $row['detalles']; ?> </p>
+                                    <img id="div100" src="ejercicios/<?php echo $row['tipo_comida']; ?>.jpg" alt="dsadas" />
+                                    <input value="<?php echo$row["id_comida"]; ?>" name="idComida" style="display: none"/>
+                                    <div class="btn-group">
+                                        <input type="submit" class="btn btn-default" name="loHice" value="¡Lo hice!">
+
+                                    </div>
+                                </div>
                             </div>
-                        </div>
+                        </form>
                     </div>
                     <?php
                 }

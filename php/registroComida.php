@@ -1,5 +1,15 @@
 <?php
-
+if (isset($_REQUEST["loHice"])) {
+    include '../Clases/Comida.php';
+    $comida = new Comida();
+    $comida->setId_comida($_POST["idComida"]);
+    $comida->loHice();
+} else if ($_REQUEST["noLoHice"]) {
+    include '../Clases/Comida.php';
+    $comida = new Comida();
+    $comida->setId_comida($_POST["idComida"]);
+    $comida->noLoHice($_POST["txtIdComida"]);
+}
 if (isset($_REQUEST["btnEliminar"])) {
     include '../Clases/Comida.php';
     $comida = new Comida();

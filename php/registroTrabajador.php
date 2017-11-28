@@ -2,6 +2,7 @@
 //if ($_SERVER['REQUEST_METHOD'] == "POST" and isset($_POST['btnRegistrarUsuario'])) {
     if (isset($_POST["txtNombre"]) && isset($_POST["txtApellidoUno"]) && isset($_POST["txtApellidoDos"]) && isset($_POST["txtCedula"]) && isset($_POST["txtDireccion"]) && isset($_POST["txtTelefono"]) && isset($_POST["txtContrasena"]) && isset($_POST["txtConfContrasenna"]) && isset($_POST["txtConfContrasenna"]) && isset($_POST["combobox"])) {
         include '../Clases/Trabajador.php';
+        session_start();
         $trabajador = new trabajador();
         $trabajador->setNombre($_REQUEST["txtNombre"]);
         $trabajador->setApellidoUno($_REQUEST["txtApellidoUno"]);
@@ -18,11 +19,11 @@
             
         } else {
             if ($trabajador->isTrabajadorExiste()=== FALSE) {
-                print $trabajador->guardarTrabajador();
+                print $trabajador->guardarTrabajador($_SESSION["IDTIENDA"]);
             } else {
-//              print "<script>alert(\"Error usuario o email ya existen :v\");window.location='../RegistroTrabajador.php';</script>";
+             print "<script>alert(\"Error usuario o email ya existen :v\");window.location='../RegistroTrabajador.php';</script>";
             }
         }
     }
-//}
+
 ?>

@@ -51,6 +51,24 @@ class Comida {
             print "<script>alert(\"Bien. Comida actualizada\");window.location='../mantenimintoHistorial.php';</script>";
         }
     }
+    public function loHice() {
+        include "conexion.php";
+        $sql = "UPDATE `comida` SET `estado` = 'Terminado' WHERE id_comida = $this->id_comida";
+        if ($con->query($sql) === FALSE) {
+            die("<script>alert(\"Error description: " . mysqli_error($con) . "\");</script>");
+        } else if (true) {
+            print "<script>alert(\"Bien. Comida Actualizada\");window.location='../principal.php';</script>";
+        }
+    }
+    public function noLoHice() {
+        include "conexion.php";
+        $sql = "UPDATE `comida` SET `estado` = 'Pendiente' WHERE id_comida = $this->id_comida";
+        if ($con->query($sql) === FALSE) {
+            die("<script>alert(\"Error description: " . mysqli_error($con) . "\");</script>");
+        } else if (true) {
+            print "<script>alert(\"Bien. Comida Actualizada\");window.location='../principal.php';</script>";
+        }
+    }
 
     function getEstado() {
         return $this->estado;

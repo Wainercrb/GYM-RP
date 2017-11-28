@@ -11,8 +11,6 @@ if (isset($_POST["editar"])) {
 
 
 
-
-echo 'entro';
 if (isset($_POST["txtName"]) && isset($_POST["txtSurnames"]) && isset($_POST["txtAdress"]) && isset($_POST["txtId"]) && isset($_POST["txtPhone"]) && isset($_POST["txtEmail"]) && isset($_POST["txtUser"]) && isset($_POST["txtConfPass"]) && isset($_POST["txtAge"])) {
     include '../Clases/Usuario.php';
     include '../Clases/Historial.php';

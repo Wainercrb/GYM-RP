@@ -1,6 +1,14 @@
 body {
     padding-right: 0px;
     padding-left: 0px;
+    margin:0;
+    color:#6a6f8c;
+    background-image:url(fondoLogin.jpg);
+    -webkit-background-size: cover;
+    -moz-background-size: cover;
+    -o-background-size: cover;
+    background-size: cover;
+    font:600 16px/18px 'Open Sans',sans-serif;
 }
 .bs-example{
     margin: 20px;
@@ -38,17 +46,20 @@ footer a:hover {
     width: 70% !important;
 }
 table caption {
-	padding: .5em 0;
+    padding: .5em 0;
 }
 
 @media screen and (max-width: 767px) {
-  table caption {
-    border-bottom: 1px solid #ddd;
-  }
+    table caption {
+        border-bottom: 1px solid #ddd;
+    }
 }
-
 .p {
-  text-align: center;
-  padding-top: 140px;
-  font-size: 14px;
+    text-align: center;
+    padding-top: 140px;
+    font-size: 14px;
+}
+#input-table{
+    border: none;
+
 }
