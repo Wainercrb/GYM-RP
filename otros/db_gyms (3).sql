@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Servidor: 127.0.0.1
--- Tiempo de generación: 22-11-2017 a las 20:26:35
+-- Tiempo de generación: 28-11-2017 a las 03:33:54
 -- Versión del servidor: 10.1.25-MariaDB
 -- Versión de PHP: 5.6.31
 
@@ -21,6 +21,20 @@ SET time_zone = "+00:00";
 --
 -- Base de datos: `db_gyms`
 --
+
+-- --------------------------------------------------------
+
+--
+-- Estructura de tabla para la tabla `cita`
+--
+
+CREATE TABLE `cita` (
+  `id_cita` bigint(20) UNSIGNED NOT NULL,
+  `id_usuario` int(11) DEFAULT NULL,
+  `id_trabajador` int(11) DEFAULT NULL,
+  `fecha` datetime DEFAULT NULL,
+  `detalles` text
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 -- --------------------------------------------------------
 
@@ -171,6 +185,15 @@ CREATE TABLE `usuario` (
 --
 
 --
+-- Indices de la tabla `cita`
+--
+ALTER TABLE `cita`
+  ADD PRIMARY KEY (`id_cita`),
+  ADD UNIQUE KEY `id_cita` (`id_cita`),
+  ADD KEY `cita_usuario` (`id_usuario`),
+  ADD KEY `cita_trabajador` (`id_trabajador`);
+
+--
 -- Indices de la tabla `comida`
 --
 ALTER TABLE `comida`
@@ -231,15 +254,20 @@ ALTER TABLE `usuario`
 --
 
 --
+-- AUTO_INCREMENT de la tabla `cita`
+--
+ALTER TABLE `cita`
+  MODIFY `id_cita` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
+--
 -- AUTO_INCREMENT de la tabla `comida`
 --
 ALTER TABLE `comida`
-  MODIFY `id_comida` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `id_comida` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
 --
 -- AUTO_INCREMENT de la tabla `gym_admin`
 --
 ALTER TABLE `gym_admin`
-  MODIFY `id_local_admin` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+  MODIFY `id_local_admin` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=14;
 --
 -- AUTO_INCREMENT de la tabla `gym_pesona`
 --
@@ -249,22 +277,22 @@ ALTER TABLE `gym_pesona`
 -- AUTO_INCREMENT de la tabla `historial`
 --
 ALTER TABLE `historial`
-  MODIFY `id_historial` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=48;
+  MODIFY `id_historial` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=49;
 --
 -- AUTO_INCREMENT de la tabla `locales`
 --
 ALTER TABLE `locales`
-  MODIFY `id_local` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
+  MODIFY `id_local` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=11;
 --
 -- AUTO_INCREMENT de la tabla `rutina`
 --
 ALTER TABLE `rutina`
-  MODIFY `id_rutina` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=126;
+  MODIFY `id_rutina` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=131;
 --
 -- AUTO_INCREMENT de la tabla `trabajador`
 --
 ALTER TABLE `trabajador`
-  MODIFY `id_trabajador` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=8;
+  MODIFY `id_trabajador` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=16;
 --
 -- AUTO_INCREMENT de la tabla `usuario`
 --
@@ -273,6 +301,12 @@ ALTER TABLE `usuario`
 --
 -- Restricciones para tablas volcadas
 --
+
+--
+-- Filtros para la tabla `cita`
+--
+ALTER TABLE `cita`
+  ADD CONSTRAINT `cita_trabajador` FOREIGN KEY (`id_trabajador`) REFERENCES `trabajador` (`id_trabajador`);
 
 --
 -- Filtros para la tabla `gym_admin`

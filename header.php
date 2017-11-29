@@ -11,9 +11,8 @@
         </div>
         <div id="navbarCollapse" class="collapse navbar-collapse">
             <ul class="nav navbar-nav">
-                <li class="active"><a href="#">Inicio</a></li>
-                <li><a href="#">Registro</a></li>
-                <li><a href="#">Salir</a></li>
+                <li class="active"><a href="Principal.php">Inicio</a></li>
+                <li><a href="index.php">Salir</a></li>
             </ul>
             <ul class="nav navbar-nav navbar-right">
                 <?php if ($navbarId == 0) {

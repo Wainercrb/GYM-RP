@@ -34,17 +34,21 @@ class trabajador {
      * Metodo guarda el trabajador que recibe por parametro
      * @return string si es exitoso o no
      */
-    public function guardarTrabajador() {
+    public function guardarTrabajador($id_tienda) {
         include "conexion.php";
         $data = file_get_contents($this->foto['tmp_name']);
         $data = mysql_real_escape_string($data);
         $sql = "INSERT INTO trabajador(nombre, foto, apellidoUno, apellidoDos, cedula, telefono, direccion, email,  rol, usuario, contrasenna) VALUES ('$this->nombre', '$data', '$this->apellidoUno', '$this->apellidoDos', '$this->cedula', '$this->telefono', '$this->direccion', '$this->email', '$this->rol', '$this->usuario', '$this->contrasenna')";
         if ($con->query($sql)) {
-            $con->close();
-            return "<script>alert(\"Bien. Empleado se guardo correctamente :)\");window.location='../RegistroTrabajador.php';</script>";
-        } else {
-            return "<script>alert(\"Error al agregar el el trabajador :(, detalles: " . mysqli_error($con) . "\");window.location='../RegistroTrabajador.php';</script>";
+            $last_id = $con->insert_id;
+            $sql = "INSERT INTO gym_admin(id_local, id_admin)VALUES ('$id_tienda','$last_id')";
+            echo $sql;
+            if ($con->query($sql)) {
+                $con->close();
+                return "<script>alert(\"Bien. Empleado se guardo correctamente :)\");window.location='../RegistroTrabajador.php';</script>";
+            }
         }
+        return "<script>alert(\"Error al agregar el el trabajador :(, detalles: " . mysqli_error($con) . "\");window.location='../RegistroTrabajador.php';</script>";
     }
 
     /**
@@ -64,14 +68,41 @@ class trabajador {
         }
         return $registrado;
     }
-/**
- * Metodo carga el trabajador por usuario
- * @return boolean true si esta, false se no.
- */    
+
+    /**
+     * Metodo carga el trabajador por usuario
+     * @return boolean true si esta, false se no.
+     */
     public function cargarTrabajador() {
         $state = false;
         include "conexion.php";
-        $sql = "SELECT t.id_trabajador, t.nombre, t.apellidoUno, t.apellidoDos, t.foto, t.email, t.usuario, t.contrasenna,l.nombre as nombre_local, l.id_local FROM trabajador t, locales l, gym_admin gd WHERE gd.id_local = l.id_local AND gd.id_admin = t.id_trabajador AND (t.usuario = '$this->usuario' or t.email='$this->email') and t.contrasenna='$this->contrasenna' and (t.rol = 'Admin' or t.rol = 'Nutricionista' or t.rol = 'Entrenador')";
+        $sql = "SELECT t.id_trabajador, t.nombre, t.rol, t.apellidoUno, t.apellidoDos, t.foto, t.email, t.usuario, t.contrasenna,l.nombre as nombre_local, l.id_local FROM trabajador t, locales l, gym_admin gd WHERE gd.id_local = l.id_local AND gd.id_admin = t.id_trabajador AND (t.usuario = '$this->usuario' or t.email='$this->email') and t.contrasenna='$this->contrasenna'";
+        if (!$query = $con->query($sql)) {
+            die("Error description al cargar el trabajador :(..Detalles: " . mysqli_error($con));
+            return;
+        }
+        while ($row = $query->fetch_array()) {
+
+            session_start();
+            $_SESSION['ID'] = $row["id_trabajador"];
+            $_SESSION['NOMBRE'] = $row["nombre"];
+            $_SESSION['APELLIDOS'] = $row["apellidoUno"] . " " . $row["apellidoDos"];
+            $_SESSION['FOTO'] = $row["foto"];
+            $_SESSION['EMAIL'] = $row["email"];
+            $_SESSION['USUARIO'] = $row["usuario"];
+            $_SESSION['CONTRASENNA'] = $row["contrasenna"];
+            $_SESSION['TIPOUSUARIO'] = $row["rol"];
+            $_SESSION['IDTIENDA'] = $row["id_local"];
+            $_SESSION['NOMBRETIENDA'] = $row["nombre_local"];
+            $state = true;
+        }
+        return $state;
+    }
+
+    public function cargarTrabajadorNoShop() {
+        $state = false;
+        include "conexion.php";
+        $sql = "SELECT * FROM trabajador WHERE usuario = '$this->usuario' AND contrasenna = '$this->contrasenna' AND rol = 'admin'";
         if (!$query = $con->query($sql)) {
             die("Error description al cargar el trabajador :(..Detalles: " . mysqli_error($con));
             return;
@@ -80,17 +111,15 @@ class trabajador {
             session_start();
             $_SESSION['ID'] = $row["id_trabajador"];
             $_SESSION['NOMBRE'] = $row["nombre"];
-            $_SESSION['APELLIDOS'] = $row["apellidoUno"]. " " . $row["apellidoDos"];
+            $_SESSION['APELLIDOS'] = $row["apellidoUno"] . " " . $row["apellidoDos"];
             $_SESSION['FOTO'] = $row["foto"];
             $_SESSION['EMAIL'] = $row["email"];
             $_SESSION['USUARIO'] = $row["usuario"];
             $_SESSION['CONTRASENNA'] = $row["contrasenna"];
-            $_SESSION['TIPOUSUARIO'] = "trabajador";
-            $_SESSION['IDTIENDA'] = $row["id_local"];
-            $_SESSION['NOMBRETIENDA'] = $row["nombre_local"];
-            $_SESSION["EDIT"] = "FALSE";
-            $_SERVER["wianer"] = "wainer";
-            $state = true;;
+            $_SESSION['TIPOUSUARIO'] = $row["rol"];
+            $_SESSION['IDTIENDA'] = "";
+            $_SESSION['NOMBRETIENDA'] = "";
+            $state = true;
         }
         return $state;
     }
@@ -146,6 +175,7 @@ class trabajador {
     function getContrasenna() {
         return $this->contrasenna;
     }
+
     function getEmail() {
         return $this->email;
     }
@@ -154,7 +184,6 @@ class trabajador {
         $this->email = $email;
     }
 
-    
     function setId_trabajador($id_trabajador) {
         $this->id_trabajador = $id_trabajador;
     }

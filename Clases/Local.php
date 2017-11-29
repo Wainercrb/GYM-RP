@@ -38,7 +38,7 @@ class local {
             $sql = "INSERT INTO gym_admin(id_local, id_admin) VALUES ('$last_id','$idAdministrador')";
             if ($con->query($sql)) {
                 $con->close();
-                return "<script>alert(\"Bien. Nuevo local agregado correctamente :)\");window.location='../RegistroGym.php';</script>";
+                return "<script>alert(\"Bien. Nuevo local agregado correctamente :)\");window.location='../index.php';</script>";
             } else {
                 return "<script>alert(\"Error al agregar el local :(, detalles: " . mysqli_error($con) . "\");window.location='../RegistroGym.php';</script>";
             }

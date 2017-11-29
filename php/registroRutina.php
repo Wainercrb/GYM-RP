@@ -20,18 +20,19 @@ if (isset($_REQUEST["btnEliminar"])) {
     if (isset($_POST['usuario'])) {
         include '../Clases/Rutina.php';
         $rutina = new Rutina();
-        for ($index = 0; $index < count($_POST['lugarTonificar']); $index++) {
-            $rutina->setLugar_tonificar($_POST['lugarTonificar'][$index]);
-            $rutina->setEquipo($_POST['equipo'][$index]);
-            $rutina->setTipo_ejercicio($_POST['tipo'][$index]);
-            $rutina->setSessiones($_POST['series'][$index]);
-            $rutina->setRepeticiones($_POST['repeticiones'][$index]);
-            for ($index1 = 0; $index1 < count($_POST['usuario']); $index1++) {
-                $rutina->setUsuario($_POST['usuario'][$index1]);
-                $rutina->guardarRutina();
+        if (isset($_POST['lugarTonificar'])) {
+            for ($index = 0; $index < count($_POST['lugarTonificar']); $index++) {
+                $rutina->setLugar_tonificar($_POST['lugarTonificar'][$index]);
+                $rutina->setEquipo($_POST['equipo'][$index]);
+                $rutina->setTipo_ejercicio($_POST['tipo'][$index]);
+                $rutina->setSessiones($_POST['series'][$index]);
+                $rutina->setRepeticiones($_POST['repeticiones'][$index]);
+                for ($index1 = 0; $index1 < count($_POST['usuario']); $index1++) {
+                    $rutina->setUsuario($_POST['usuario'][$index1]);
+                    $rutina->guardarRutina();
+                }
             }
         }
-
         include '../Clases/Historial.php';
         $historial = new Historial();
         if (isset($_POST['mdAltura'])) {
@@ -53,10 +54,8 @@ if (isset($_REQUEST["btnEliminar"])) {
                 $historial->guardar();
             }
         }
-
         include '../Clases/Comida.php';
         $comida = new Comida();
-
         if (isset($_POST['cantidadComida'])) {
             for ($index3 = 0; $index3 < count($_POST['cantidadComida']); $index3++) {
                 $comida->setCantidad($_POST['cantidadComida'][$index3]);

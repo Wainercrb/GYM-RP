@@ -78,14 +78,11 @@ while ($row = $query->fetch_array()) {
                                                                         <th># id</th>
                                                                         <th>Particinte</th>
                                                                         <th>Usuario</th>
-
                                                                     </tr>
                                                                 </thead>
                                                                 <tbody>
-
                                                                 </tbody>
                                                             </table>
-
                                                         </div>
                                                         <div class="modal-footer">
                                                             <button type="button" class="btn btn-secondary" data-dismiss="modal">Cerrar</button>
@@ -363,10 +360,6 @@ while ($row = $query->fetch_array()) {
                     </div>
                 </div>
             </div>
-
-
-
-
             <div class="container">
                 <div class="modal fade" id="modaComida" role="dialog">
                     <div class="modal-dialog">
@@ -403,7 +396,7 @@ while ($row = $query->fetch_array()) {
                     </div>
                 </div>
             </div>
-            <input value="<?php echo $navbarId; ?>" name="id_trabajador"/>
+            <input style="display: none" value="<?php echo $navbarId; ?>" name="id_trabajador"/>
         </form>
         <?php include "footer.php" ?>
         <script src="js/jquery-3.2.1.min.js"></script>
@@ -411,10 +404,4 @@ while ($row = $query->fetch_array()) {
         <script src="js/MyJS/RegistroRutina.js"></script>
     </body>
 </html>
-<style>
-    #input-table{
-        border: none;
 
-    }
-
-</style>

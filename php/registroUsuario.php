@@ -9,12 +9,18 @@ if (isset($_POST["editar"])) {
     echo 'nooo';
 }
 
+<<<<<<< HEAD
 if (isset($_REQUEST["btnEliminar"])) {
     include '../Clases/Usuario.php';
     $usuario = new usuario();
     $usuario->setId_usuario($_POST["txtId"]);
     $usuario->eliminarUsuario();
 } else if (isset($_REQUEST["Actualizar"])) {
+=======
+
+
+if (isset($_POST["txtName"]) && isset($_POST["txtSurnames"]) && isset($_POST["txtAdress"]) && isset($_POST["txtId"]) && isset($_POST["txtPhone"]) && isset($_POST["txtEmail"]) && isset($_POST["txtUser"]) && isset($_POST["txtConfPass"]) && isset($_POST["txtAge"])) {
+>>>>>>> f08f2a2634b10eaf60ed7782dad72f64edbe4f7e
     include '../Clases/Usuario.php';
     $usuario = new usuario();
     $usuario->setId_usuario($_POST["txtId"]);
