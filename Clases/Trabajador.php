@@ -195,4 +195,28 @@ class trabajador {
         $this->contrasenna = $contrasenna;
     }
 
+    public function actualizarTrabajador() {
+        include '../php/conexion.php';
+        $sql="UPDATE `trabajador` SET `nombre`='$this->nombre',`apellidoUno`='$this->apellidoUno',`apellidoDos`='$this->apellidoDos',`cedula`='$this->cedula',`telefono`='$this->telefono',`direccion`='$this->direccion',`email`='$this->email',`rol`='$this->rol',`usuario`='$this->usuario',`contrasenna`='$this->contrasenna' WHERE id_trabajador=$this->id_trabajador";
+         if ($con->query($sql) === FALSE) {
+            die("<script>alert(\"Error description: " . mysqli_error($con) . "\");</script>");
+        } else if (true) {
+            print "<script>alert(\"Bien. Usuario actualizado\");window.location='../MantenimientoTrabajador.php';</script>";
+        }
+    }
+
+    public function eliminarUsuario() {
+          include "conexion.php";
+        $sql1 = "DELETE FROM `gym_admin` WHERE id_admin =$this->id_trabajador";
+        if ($con->query($sql1) === FALSE) {
+            die("<script>alert(\"Error description: " . mysqli_error($con) . "\");</script>");
+        }
+        $sql2 = "DELETE FROM `trabajador` WHERE id_trabajador=$this->id_trabajador";
+
+        if ($con->query($sql2) === FALSE) {
+            die("<script>alert(\"Error description: " . mysqli_error($con) . "\");</script>");
+        }
+        print "<script>alert(\"Bien. usuario Eliminado correctamente\");window.location='../MantenimientoTrabajador.php';</script>";
+    }
+
 }

@@ -131,6 +131,31 @@ class usuario {
         }
     }
 
+    public function eliminarUsuario() {
+        include "conexion.php";
+        $sql1 = "DELETE FROM `gym_pesona` WHERE id_persona =$this->id_usuario";
+        if ($con->query($sql1) === FALSE) {
+            die("<script>alert(\"Error description: " . mysqli_error($con) . "\");</script>");
+        }
+        $sql2 = "DELETE FROM `usuario` WHERE id_usuario=$this->id_usuario";
+
+        if ($con->query($sql2) === FALSE) {
+            die("<script>alert(\"Error description: " . mysqli_error($con) . "\");</script>");
+        }
+        print "<script>alert(\"Bien. usuario Eliminado correctamente\");window.location='../mantenimintoUsuario.php';</script>";
+    }
+    
+    public function actualizarUsuario() {
+        include "conexion.php";
+
+        $sql = "UPDATE `usuario` SET `nombre`='$this->nombre',`apellidos`='$this->apellidos',`direccion`='$this->direccion',`usuario`='$this->usuario',`genero`='$this->genero',`contrasenna`='$this->contrasenna',`edad`='$this->edad',`cedula`='$this->cedula',`telefono`='$this->telefono',`email`='$this->mail' WHERE `id_usuario`=$this->id_usuario";
+        if ($con->query($sql) === FALSE) {
+            die("<script>alert(\"Error description: " . mysqli_error($con) . "\");</script>");
+        } else if (true) {
+            print "<script>alert(\"Bien. Usuario actualizado\");window.location='../mantenimintoUsuario.php';</script>";
+        }
+    }
+
     function getId_usuario() {
         return $this->id_usuario;
     }

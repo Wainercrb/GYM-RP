@@ -1,5 +1,25 @@
 <?php
-//if ($_SERVER['REQUEST_METHOD'] == "POST" and isset($_POST['btnRegistrarUsuario'])) {
+ if (isset($_REQUEST["btnEliminar"])) {
+    include '../Clases/Trabajador.php';
+    $trabajador = new trabajador();
+    $trabajador->setId_trabajador($_POST["txtId"]);
+    $trabajador->eliminarUsuario();
+} else if (isset($_REQUEST["Actualizar"])) {
+    include '../Clases/Trabajador.php';
+    $Trabajador = new trabajador();
+    $Trabajador->setId_trabajador($_POST["txtId"]);
+    $Trabajador->setNombre($_REQUEST["txtnombre"]);
+    $Trabajador->setApellidoUno($_REQUEST["txtApellidoUno"]);
+    $Trabajador->setApellidoDos($_REQUEST["txtApellidoDos"]);
+    $Trabajador->setCedula($_REQUEST["txtCedula"]);
+     $Trabajador->setTelefono($_REQUEST["txtTelefono"]);
+    $Trabajador->setDireccion($_REQUEST["txtDireccion"]);
+    $Trabajador->setEmail($_REQUEST["txtEmail"]);
+    $Trabajador->setRol($_REQUEST["txtRol"]);
+    $Trabajador->setUsuario($_REQUEST["txtUsuario"]);
+    $Trabajador->setContrasenna($_REQUEST["txtContrasena"]);
+    $Trabajador->actualizarTrabajador();
+} else {
     if (isset($_POST["txtNombre"]) && isset($_POST["txtApellidoUno"]) && isset($_POST["txtApellidoDos"]) && isset($_POST["txtCedula"]) && isset($_POST["txtDireccion"]) && isset($_POST["txtTelefono"]) && isset($_POST["txtContrasena"]) && isset($_POST["txtConfContrasenna"]) && isset($_POST["txtConfContrasenna"]) && isset($_POST["combobox"])) {
         include '../Clases/Trabajador.php';
         $trabajador = new trabajador();
@@ -24,5 +44,6 @@
             }
         }
     }
+}
 //}
 ?>

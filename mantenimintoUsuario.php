@@ -132,7 +132,7 @@
         <script>
 
             function editarUsuario(wainer) {
-                window.location = "registroUsuario.php?id=" + wainer + "";
+                window.location = "UpdateUsuarios.php?id=" + wainer + "";
 
             }
 
