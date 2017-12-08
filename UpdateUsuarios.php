@@ -170,7 +170,7 @@ if (!isset($_GET["id"])) {
                                     <button type="button" class="btn btn-default" data-dismiss="modal"  role="button">Cerrar</button>
                                 </div>
                                 <div class="btn-group" role="group">
-                                    <input type="submit" class="btn btn-default btn-hover-green"  value="Actualizar" name="Actualizar" role="button"/>
+                                    <input type="submit" class="btn btn-default btn-hover-green"  value="Actualizar" name="btnActualizar" role="button"/>
                                 </div>
                             </div>
                         </div>
