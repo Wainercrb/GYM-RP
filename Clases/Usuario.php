@@ -78,7 +78,7 @@ class usuario {
     public function cargarUsuario() {
         $state = false;
         include "conexion.php";
-        $sql = "SELECT u.id_usuario, u.nombre, u.apellidos, u.edad,  u.foto, u.email, u.usuario, u.contrasenna, l.nombre as nombre_local, l.id_local FROM usuario u, locales l, gym_pesona gp WHERE gp.id_gym = l.id_local AND gp.id_persona = u.id_usuario AND (u.usuario='$this->usuario' or u.email='$this->mail') and u.contrasenna='$this->contrasenna';";
+        $sql = "SELECT u.id_usuario, u.nombre, u.genero, u.apellidos, u.edad,  u.foto, u.email, u.usuario, u.contrasenna, l.nombre as nombre_local, l.id_local FROM usuario u, locales l, gym_pesona gp WHERE gp.id_gym = l.id_local AND gp.id_persona = u.id_usuario AND (u.usuario='$this->usuario' or u.email='$this->mail') and u.contrasenna='$this->contrasenna';";
         if (!$query = $con->query($sql)) {
             echo("Error description: " . mysqli_error($con));
             return;
@@ -97,6 +97,7 @@ class usuario {
             $_SESSION["EDIT"] = "FALSE";
             $_SESSION['IDTIENDA'] = $row["id_local"];
             $_SESSION['NOMBRETIENDA'] = $row["nombre_local"];
+            $_SESSION['GENERO'] = $row["genero"];
             $state = true;
         }
         return $state;
@@ -144,7 +145,7 @@ class usuario {
         }
         print "<script>alert(\"Bien. usuario Eliminado correctamente\");window.location='../mantenimintoUsuario.php';</script>";
     }
-    
+
     public function actualizarUsuario() {
         include "conexion.php";
 
@@ -153,6 +154,38 @@ class usuario {
             die("<script>alert(\"Error description: " . mysqli_error($con) . "\");</script>");
         } else if (true) {
             print "<script>alert(\"Bien. Usuario actualizado\");window.location='../mantenimintoUsuario.php';</script>";
+        }
+    }
+
+    public function verificarEmailUsuario() {
+        include "conexion.php";
+        $sql = "select * from usuario where usuario='$this->usuario' or email='$this->mail'";
+        if (!$query = $con->query($sql)) {
+            $con->close();
+            die("<script>alert(\"Error al verficar usuario existente" . mysqli_error($con) . "\");window.location='../CambioContrasenna.php';</script>");
+        }
+        while ($r = $query->fetch_array()) {
+            die("<script>alert(\"Ingrese su nueva contraseña" . mysqli_error($con) . "\");window.location='../CambioContrasenna.php?rs=" . $r["id_usuario"] . "&type=u';</script>");
+        }
+        $sql = "select * from trabajador where usuario='$this->usuario' or email='$this->mail'";
+        if (!$query = $con->query($sql)) {
+            $con->close();
+            die("<script>alert(\"Error al verficar usuario existente" . mysqli_error($con) . "\");window.location='../CambioContrasenna.php';</script>");
+        }
+        while ($r = $query->fetch_array()) {
+            die("<script>alert(\"Ingrese su nueva contraseña" . mysqli_error($con) . "\");window.location='../CambioContrasenna.php?rs=" . $r["id_trabajador"] . "&type=t';</script>");
+        }
+        echo("<script>alert(\"No se encontraron concidencias'../CambioContrasenna.php?rs=" . $r["id_trabajador"] . "&type=t';</script>");
+    }
+
+    public function cambiarContrasenna() {
+        include "conexion.php";
+        $sql = "UPDATE usuario SET contrasenna = '$this->contrasenna'  WHERE id_usuario = $this->id_usuario";
+        if ($query = $con->query($sql)) {
+            $con->close();
+            die("<script>alert(\"Contraseña actualzada\");window.location='../index.php';</script>");
+        } else {
+            die("<script>alert(\"Error al actulizar la contraseña" . mysqli_error($con) . "\");window.location='../index.php';</script>");
         }
     }
 

@@ -39,6 +39,7 @@ function anadirColumna(usu) {
     cell3.innerHTML = '<input type="text" readonly id = "input-table" value=' + usu.usuario + ' class="form-control" name="" onclick="eliminarFilaUsuario(this);" />';
     document.getElementById("btnBuscarUsuario").value = "";
     usuariosCargados.push(usu.usuario);
+    alert("Usuario añadido");
 }
 
 function agregarEjercicio() {
@@ -66,6 +67,7 @@ function agregarEjercicio() {
     cell5.innerHTML = '<input type="text" readonly id = "input-table" value= "' + document.getElementById("txtRepeticiones").value + '" class="form-control" name="repeticiones[]" onclick="eliminarFilaRutina(this);"/>';
     document.getElementById("txtSeries").value = 0;
     document.getElementById("txtRepeticiones").value = 0;
+    alert("Ejercicio añadido correctamente");
 }
 
 
@@ -97,15 +99,13 @@ function eliminarFilaUsuario(btndel) {
     }
 }
 function grupoCompleto() {
-    alert(usuariosCargados.length);
     if (usuariosCargados.length === 0) {
-        alert("Erro :( No hay usuarios agregados");
+        alert("Error No hay usuarios agregados");
         return;
     }
     var alC = confirm("¿Quieres cerra el grupo?");
     if (alC === true) {
         document.getElementById("btnAnadir").disabled = true;
-
         for (var i = 0; i < usuariosCargados.length; i++) {
             var table = document.getElementById("tabla_medidas");
             var row = table.insertRow(1);
@@ -136,10 +136,8 @@ function grupoCompleto() {
             cell12.innerHTML = '<input type="number" style="width: 7em;" step=0.01  id = "txt_cluteos" value= "" class="form-control" name="mdGluteos[]" />';
             cell13.innerHTML = '<input type="number" style="width: 7em;" step=0.01  id = "txt_cadera" value= "" class="form-control" name="mdCadera[]" />';
         }
-
     }
 }
-
 
 function anadirColumnaComida() {
     if (document.getElementById('tblGrid').rows.length === 1) {
@@ -152,7 +150,7 @@ function anadirColumnaComida() {
     var fecha = document.getElementById("txtFecha").value;
     var detalles = document.getElementById("txtDetalle").value;
     if (cantidad <= 0 || comida === "" || hora === "" || !Date.parse(fecha) || detalles === "") {
-        alert("Error :( Verifica los datos de las comidas");
+        alert("Error verifica los datos de las comidas");
         return;
     }
     var table = document.getElementById("tabla_comidas");
@@ -172,9 +170,8 @@ function anadirColumnaComida() {
     document.getElementById("txtTiempo").value = "";
     document.getElementById("txtFecha").value = "";
     document.getElementById("txtDetalle").value = "";
+    alert("Comida añadida correctamente");
 }
-
-
 function eliminarFilaComida(btndel) {
     var alertConf = confirm("¿Quieres eliminar la fila que contiene a : " + btndel.value + "?");
     if (alertConf === true) {

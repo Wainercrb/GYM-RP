@@ -18,7 +18,7 @@ class cita {
 
     public function guardar() {
         include "conexion.php";
-        $sql = "INSERT INTO cita(id_usuario, id_trabajador, fecha, detalles) VALUES ('$this->id_usuario','$this->id_trabajador','$this->fecha','$this->detalle')";
+        $sql = "INSERT INTO cita(id_usuario, id_trabajador, fecha, detalles, estado) VALUES ('$this->id_usuario','$this->id_trabajador','$this->fecha','$this->detalle', 'pendiente')";
         if ($con->query($sql) === FALSE) {
             echo mysqli_error($con);
             die("<script>alert(\"Error description: " . mysqli_error($con) . "\");</script>");
@@ -35,6 +35,28 @@ class cita {
             die("<script>alert(\"Error description: " . mysqli_error($con) . "\");</script>");
         } else {
             print "<script>alert(\"Bien. Cita terminada\");window.location='../citasTrabajador.php';</script>";
+        }
+    }
+    
+    public function aprobada() {
+        include "conexion.php";
+        $sql = "UPDATE cita SET estado = 'Aprobada' WHERE id_cita = '$this->id_cita'";
+        if ($con->query($sql) === FALSE) {
+            echo mysqli_error($con);
+            die("<script>alert(\"Error description: " . mysqli_error($con) . "\");</script>");
+        } else {
+            print "<script>alert(\"Bien. Cita Actualizada\");window.location='../citasTrabajador.php';</script>";
+        }
+    }
+    
+    public function rechazar() {
+        include "conexion.php";
+        $sql = "UPDATE cita SET estado = 'Rechazada' WHERE id_cita = '$this->id_cita'";
+        if ($con->query($sql) === FALSE) {
+            echo mysqli_error($con);
+            die("<script>alert(\"Error description: " . mysqli_error($con) . "\");</script>");
+        } else {
+            print "<script>alert(\"Bien. Cita Actualizada\");window.location='../citasTrabajador.php';</script>";
         }
     }
 

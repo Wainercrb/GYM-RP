@@ -34,7 +34,7 @@
                         <form style="align-items: center" action="php/voto.php" name="frmVotaciones" method="POST" enctype="multipart/form-data">
                             <h1 class="text-center">
                                 <input class="like" type="submit" value="<?php echo "Likes " . $PuntMas ?>" name="btnLike" />
-                                <input class="dislike" type="submit" value="<?php echo "Deslikes" . $PuntMen ?>" name="btnDeslike" />
+                                <input class="dislike" type="submit" value="<?php echo "Deslikes " . $PuntMen ?>" name="btnDeslike" />
                                 <input  style="display: none" value="<?php echo $PuntMas ?>" name="like" />
                                 <input  style="display: none" value="<?php echo $PuntMen ?>" name="deslike" />
                             </h1>
@@ -43,12 +43,9 @@
                         </form>
                         <form method="post">
                             <fieldset>
-
                                 <div class='input-group date text-center center-block' id='divMiCalendario'>
-
                                     <button type="button" id="buttonCalendar"  class="btn btn-primary">fecha rutina</button>
                                     <button type="button" onclick="btnHistorial();" class="btn btn-primary">Historial</button>
-
                                     <div class="modal fade" id="modalCalendar" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
                                         <div class="modal-dialog" role="document">
                                             <div class="modal-content">
@@ -59,7 +56,6 @@
                                                     </button>
                                                 </div>
                                                 <div class="modal-body">
-
                                                     <div class="input-group date wr-date">
                                                         <input type="text" name="txtFecha" class="form-control"><span class="input-group-addon"><i class="glyphicon glyphicon-th"></i></span>
                                                     </div>
@@ -105,27 +101,18 @@
                     ?>
                     <div class="col-lg-3 col-md-3 col-sm-6 col-xs-12" id="mainDiv">
                         <div class="my-list center-block text-center"id="divdiv">
-                            <img id="div100" src="ejercicios/<?php echo $row['lugar_tonificar']; ?>.jpg" />
-
-                            <h3><?php echo "Lugar Trabajar: " . $row['lugar_tonificar']; ?></h3>
-                            <span><?php echo $row['fecha']; ?></span>
+                            <img id="div100" src="ejercicios/<?php echo $row['lugar_tonificar']; ?>.jpg"/>
+                            <h3 class="text-center"><?php echo "Lugar Trabajar: " . $row['lugar_tonificar']; ?></h3>
+                            <h5 class="text-center"><?php echo $row['fecha']; ?></h5>
                             <span class="pull-right"></span>
                             <div class="detail text-center pull-center">
                                 <?php
                                 if ($row['equipo'] === "Ninguna") {
                                     ?>
                                     <img id="img-show" src="ejercicios/<?php echo $row['tipo_ejercicio']; ?>.jpg" alt="dsadas" />
-
-                                    <?php
-                                } else {
-                                    ?>
-
+                                <?php } else { ?>
                                     <img id="img-show" src="ejercicios/<?php echo $row['equipo']; ?>.jpg" alt="dsadas" />
-                                    <?php
-                                }
-                                ?>
-
-
+                                <?php } ?>
                                 <br>
                                 <h4><?php echo 'Máquina: ' . $row['equipo']; ?></h4>
                                 <h4><?php echo 'Series: ' . $row['session'] . ' ' . 'Repeticiones: ' . $row['repeticiones']; ?></h4>
@@ -144,31 +131,43 @@
             <div class="row">
                 <h1 class="text-center">Comidas registradas</h1>
                 <?php
+                $busqueda;
+                if (isset($_POST["txtFecha"])) {
+                    $busqueda = $_POST["txtFecha"];
+                } else {
+                    $busqueda = date("Y-m-d");
+                }
                 $ctComida = 0;
-                $sql = "SELECT * from comida where fecha = '$fecha' and id_usuario = $navbarId";
+                $sql = "SELECT DISTINCT c.tipo_comida, c.estado, c.fecha, c.hora, c.detalles, c.id_comida from comida c where c.id_usuario = $navbarId AND c.fecha >= '" . $busqueda . "' AND c.estado = 'pendiente'";
                 include './php/conexion.php';
                 if (!$query = $con->query($sql)) {
-                    echo("Error description: " . mysqli_error($con));
-                    return;
+                    die("Error description: " . mysqli_error($con));
                 }
                 while ($row = $query->fetch_array()) {
                     $ctComida++;
+                    $horaInicio = strtotime($row["hora"]);
+                    $horaInicio = date("H:i", strtotime('-30 minutes', $horaInicio));
                     ?>
                     <div class="col-lg-3 col-md-3 col-sm-6 col-xs-12" >
                         <form name="frmActualizarComida" action="php/registroComida.php" method="POST" enctype="multipart/form-data">
                             <div class="my-list center-block text-center">
                                 <img id="div100" src="ejercicios/<?php echo $row['tipo_comida']; ?>.jpg" />
                                 <span><?php echo 'Tipo comida: ' . $row['tipo_comida']; ?></span>
-                                <span><?php echo 'Estado: ' . $row['estado']; ?></span>
-                                <div class="offer"><?php echo 'Fecha: ' . $row['fecha']; ?></div>
+                                <span>Estado: <?php echo$row['estado']; ?></span>
+                                <div class="offer"> Fecha: <?php echo $row['fecha'] . " ". $horaInicio." a ". $row["hora"]; ?></div>
                                 <div class="detail">
                                     <p> <?php echo $row['detalles']; ?> </p>
                                     <img id="div100" src="ejercicios/<?php echo $row['tipo_comida']; ?>.jpg" alt="dsadas" />
                                     <input value="<?php echo$row["id_comida"]; ?>" name="idComida" style="display: none"/>
-                                    <div class="btn-group">
-                                        <input type="submit" class="btn btn-default" name="loHice" value="¡Lo hice!">
-
-                                    </div>
+                                    <?php
+                                    $hora = strtotime(date('H:i:s'));
+                                    $hora = date("H:i", strtotime('+30 minutes', $hora));
+                                    ?>
+                                    <?php if ($row["fecha"] === date("Y-m-d") && (strtotime($row["hora"]) > strtotime(date('H:i:s')) && (strtotime($row["hora"]) < strtotime($hora)))) { ?>
+                                        <div class="btn-group">
+                                            <input type="submit" class="btn btn-default" name="loHice" value="¡Lo hice!">
+                                        </div>
+                                    <?php } ?>
                                 </div>
                             </div>
                         </form>
@@ -176,52 +175,11 @@
                     <?php
                 }
                 if ($ctComida === 0) {
-                    echo '<h1 class="text-center" style="color: red">No hay rutinas en esta fecha: ' . $fecha . '</h1>';
+                    echo '<h1 class="text-center" style="color: red">No hay registros de comida</h1>';
                 }
                 ?>
             </div>
         </div>
-
-        <style>
-
-            #divdiv{
-
-                max-width: 100%;
-                max-height: 60%;
-            }
-            #img-show{
-
-                max-height: 80%;
-                max-width: 60%;
-            }
-            #div100{
-                width: 200px !important;
-                height: 2100px !important;
-                max-height: 200px !important;
-                max-width: 210px !important;
-            }
-            .like, .dislike {
-                display: inline-block;
-                margin-bottom: 0;
-                font-weight: normal;
-                text-align: center;
-                vertical-align: middle;
-                cursor: pointer;
-                background: lightgreen;
-                border: 1px solid transparent;
-                white-space: nowrap;
-                padding: 6px 12px;
-                font-size: 14px;
-                line-height: 1.428571429;
-                border-radius: 4px;
-            }
-            .qty1, .qty2 {
-                border: none;
-                width:20px;
-                background: transparent;
-            }
-
-        </style>
         <?php include "footer.php" ?>
         <script src="js/jquery-3.2.1.min.js"></script>
         <script src="js/bootstrap.min.js"></script>

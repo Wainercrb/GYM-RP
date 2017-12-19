@@ -130,6 +130,18 @@ class local {
         }
     }
 
+    public function actualizar() {
+
+        include "conexion.php";
+        $sql = "UPDATE locales SET nombre = '$this->nombre', telefono = '$this->telefono', email = '$this->email' WHERE id_local = $this->id_local";         
+        if ($query = $con->query($sql)) {
+            $con->close();
+            die("<script>alert(\"GYM actualzada\");window.location='../MantenimientoGym.php';</script>");
+        } else {
+            die("<script>alert(\"Error al actulizar al actualiar el GYM" . mysqli_error($con) . "\");window.location='../MantenimientoGym.php';</script>");
+        }
+    }
+
     function getPuntuacionMas() {
         return $this->puntuacionMas;
     }

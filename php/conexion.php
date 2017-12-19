@@ -7,5 +7,5 @@ $con = new mysqli($host, $obj, $password, $db);
 if ($con->connect_error) {
     die("Error al conectar, más detalles: " . $con->connect_error);
 }
-print "<script>alert(\"conexion\")</script>";
+//print "<script>alert(\"conexion\")</script>";
 ?>

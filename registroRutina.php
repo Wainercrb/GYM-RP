@@ -27,7 +27,7 @@ while ($row = $query->fetch_array()) {
 <html lang="en">
     <head>
         <meta charset="UTF-8">
-        <title>Agregar Rutina</title>
+        <title>REGISTRO RUTINA</title>
         <meta name="viewport" content="widt=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
         <link rel="stylesheet" type="text/css" href="css/bootstrap.min.css">
         <link rel="stylesheet" type="text/css" href="css/headerFooter.css">
@@ -379,11 +379,9 @@ while ($row = $query->fetch_array()) {
                                                     <th>Hora</th>
                                                     <th>Fecha</th>
                                                     <th>Detalles</th>
-
                                                 </tr>
                                             </thead>
                                             <tbody>
-
                                             </tbody>
                                         </table>
                                     </div>

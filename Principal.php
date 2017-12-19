@@ -45,6 +45,7 @@ if (isset($_SESSION["ID"])) {
                                 <li><a href="RegistroGym.php"><i class="fa fa-users" aria-hidden="true"></i>     REGISTRO GYM</a></li>
                                 <li><a href="registroRutina.php"><i class="fa fa-users" aria-hidden="true"></i>     NUEVA RUTINA</a></li>
                                 <li><a href="mantenimintoUsuario.php"><i class="fa fa-users" aria-hidden="true"></i>     ADMINISTRAR USUARIO</a></li>
+                                <li><a href=MantenimientoGym.php><i class="fa fa-users" aria-hidden="true"></i>     ADMINISTRAR GYM</a></li>
                                 <li><a href="MantenimientoTrabajador.php"><i class="fa fa-users" aria-hidden="true"></i>     ADMINISTRAR TRABAJADOR</a></li>
                                 <li><a href="mantenimintoHistorial.php"><i class="fa fa-users" aria-hidden="true"></i>     ADMINISTRAR MEDIDAS</a></li>
                                 <li><a href="index.php"><i class="fa fa-times-circle" aria-hidden="true"></i>     SALIR</li>
@@ -58,7 +59,7 @@ if (isset($_SESSION["ID"])) {
                                 ?>
                                 <li><a href="citasUsuario.php"><i class="fa fa-bar-chart" aria-hidden="true"></i>   CITA</a></li>
                                 <li><a href="MiHistorial.php"><i class="fa fa-clock-o" aria-hidden="true"></i></i>   MI HISTORIAL</a></li>
-                                 <li><a href="index.php"><i class="fa fa-times-circle" aria-hidden="true"></i></i>  SALIR</a></li>
+                                <li><a href="index.php"><i class="fa fa-times-circle" aria-hidden="true"></i></i>  SALIR</a></li>
                                 <style>
                                     #divItems{
                                         margin-top: 50%;
@@ -142,10 +143,9 @@ if (isset($_SESSION["ID"])) {
                                 <tbody>
                                     <?php
                                     include './php/conexion.php';
-                                    $sql = "SELECT * FROM `comida`  WHERE estado = 'pendiente' and id_usuario = $id";
+                                    $sql = "SELECT * FROM `comida`  WHERE estado = 'pendiente' and id_usuario = $id AND fecha = '" . date("Y-m-d")."'";
                                     if (!$query = $con->query($sql)) {
-                                        echo("Error description: " . mysqli_error($con));
-                                        return;
+                                        die("Error description: " . mysqli_error($con));
                                     }
                                     while ($row = $query->fetch_array()) {
                                         $contador++;
@@ -156,7 +156,7 @@ if (isset($_SESSION["ID"])) {
                                             <td style="display: none"><?php echo $idComida; ?></td>
                                             <td>Se registro comida</td>
                                             <td><?php echo $fecha; ?></td>
-                                            <td><p data-placement="top" data-toggle="tooltip" title="Edit"><button class="btn btn-primary btn-xs" data-title="Edit" data-toggle="modal" name="editar" type="button" data-target="#squarespaceModal" onclick="openComida(this.value);" value="<?php echo $fecha; ?>"                                                                                                                  wainer"><span class="glyphicon glyphicon-pencil"></span></button></p></td>
+                                            <td><p data-placement="top" data-toggle="tooltip" title="Edit"><button class="btn btn-primary btn-xs" data-title="Edit" data-toggle="modal" name="editar" type="button" data-target="#squarespaceModal" onclick="openComida(this.value);" value="<?php echo $fecha; ?>"><span class="glyphicon glyphicon-pencil"></span></button></p></td>
                                         </tr>
                                         <?php
                                     }

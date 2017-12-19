@@ -16,8 +16,7 @@
         $sql = "SELECT tr.id_trabajador, tr.nombre, tr.apellidoUno, tr.apellidoDos FROM trabajador tr, gym_admin ga WHERE tr.id_trabajador = ga.id_admin AND ga.id_local = $_SESSION[IDTIENDA] AND tr.rol = 'Nutricionista'";
         $mensaje = "";
         if (!$query = $con->query($sql)) {
-            echo("Error description: " . mysqli_error($con));
-            return;
+            die("Error description: " . mysqli_error($con));
         }
         ?>
         <div class="container">
@@ -59,7 +58,7 @@
             <h1 class="text-center">Mis citas pendientes</h1>
             <div class="row category-child" style="margin-top:20px">
                 <?php
-                $sql = "SELECT c.fecha, c.detalles, t.nombre, t.apellidoUno, t.apellidoDos FROM cita c, trabajador t WHERE c.id_trabajador = t.id_trabajador AND c.id_usuario  = '$_SESSION[ID]'";
+                $sql = "SELECT c.fecha, c.detalles, t.nombre, t.apellidoUno, t.apellidoDos, c.estado FROM cita c, trabajador t WHERE c.id_trabajador = t.id_trabajador AND c.id_usuario  = '$_SESSION[ID]'";
                 if (!$query = $con->query($sql)) {
                     die("Error description: " . mysqli_error($con));
                     return;
@@ -69,16 +68,17 @@
                     $contador++;
                     ?>
                     <div class="col-lg-2 col-md-4 col-xs-6 thumb ">
-                        <a class="thumbnail" href="#">
+                        <div class="thumbnail" href="#">
                             <img class="img-responsive" src="imagenes/calendar.png" alt="">
                             <div class="wrapper">
                                 <div class="caption post-content">
-                                    <h6><?php echo "fecha: " . $row["fecha"]; ?></h6>
-                                    <h6><?php echo "detalle: " . $row["detalles"]; ?></h6>
+                                    <h6><?php echo "Fecha: " . $row["fecha"]; ?></h6>
+                                    <h6><?php echo "Detalle: " . $row["detalles"]; ?></h6>
+                                    <h6><?php echo "Estado: " . $row["estado"]; ?></h6>
                                     <p><?php echo "trabajador: " . $row["nombre"] . " " . $row["apellidoUno"] . " " . $row["apellidoDos"]; ?></p>
                                 </div>
                             </div>
-                        </a>
+                        </div>
                     </div>   
                     <?php
                 }

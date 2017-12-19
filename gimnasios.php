@@ -51,9 +51,8 @@ if (isset($_POST["selectBuscar"]) && isset($_POST["btnBuscar"])) {
 
 <html>
     <head>
-        <title>Geolocation</title>
         <meta charset="utf-8">
-        <title>Detalles productos</title>
+        <title>BUSQUEDA</title>
         <meta name="viewport" content="widt=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
         <link rel="stylesheet" type="text/css" href="css/bootstrap.min.css">
         <link rel="stylesheet" type="text/css" href="css/headerFooter.css">
@@ -86,116 +85,132 @@ if (isset($_POST["selectBuscar"]) && isset($_POST["btnBuscar"])) {
                 </div>
             </form>
         </div>
-        <div class="container" id="container">
-            <div class="row text-center center-block" style="max-width:90%;">
-                <table class="table table-hover" id="myTable">
-                    <thead>
-                        <tr>
-                            <th class="c1">Nombre</th>
-                            <th class="c2">Teléfono</th>
-                            <th class="c3">Email</th>
-                            <th class="c4">likes</th>
-                            <th class="c4">deslikes</th>
-                            <th style="display: none">Latitud</th>
-                            <th style="display: none">Longitud</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        <?php
-                        if ($sql != "") {
-                            $contador = 0;
-                            if (!$query = $con->query($sql)) {
-                                die("Error description al cargar el trabajador :(..Detalles: " . mysqli_error($con));
-                                return;
+        <div class="container latest-product-section">
+            <div class="row text-center margin-b-40">
+                <div class="col-sm-6 col-sm-offset-3">
+                    <h2>Busqueda</h2>
+                </div>
+            </div>
+            <div class="row center-block">
+                <?php
+                if ($sql != "") {
+                    $contador = 0;
+                    if (!$query = $con->query($sql)) {
+                        die("Error description al cargar el trabajador :(..Detalles: " . mysqli_error($con));
+                        return;
+                    }
+                    while ($row = $query->fetch_array()) {
+                        if ($_POST["selectBuscar"] === "distancia") {
+                            $decimals = 2;
+                            $point1_lat = $row["latitud"];
+                            $point1_long = $row["longitud"];
+                            $point2_lat = $_POST["inputLatitud"];
+                            $point2_long = $_POST["inputLongitud"];
+                            $degrees = rad2deg(acos((sin(deg2rad($point1_lat)) * sin(deg2rad($point2_lat))) + (cos(deg2rad($point1_lat)) * cos(deg2rad($point2_lat)) * cos(deg2rad($point1_long - $point2_long)))));
+                            $distance = $degrees * 111.13384;
+                            $filal = round($distance, $decimals);
+                            if ($filal <= $_POST["btnBuscar"]) {
+                                ?>
+                                <div class="col-sm-4 sm-margin-b-50" id="divGyms">
+                                    <div class="margin-b-20 text-center">
+                                        <h3>Nombre: <?php echo $row['nombre']; ?></h3>
+                                        <h4>Teléfono: <?php echo $row['telefono']; ?></h4>
+                                        <h4>Email: <?php echo $row['email']; ?></h4>
+                                        <h4>Likes: <?php echo $row['puntuacionMas']; ?> Deslikes: <?php echo $row['puntuacionMenos']; ?></h4>
+                                        <h4 style="display: none"><?php echo $row['latitud']; ?></h4>
+                                        <h4 style="display: none"><?php echo $row['longitud']; ?></h4>
+                                    </div>
+                                    <h4 class="text-center"><a href="http://maps.google.com/maps?q=<?php echo $row["latitud"]; ?>, <?php echo $row["longitud"]; ?>">click</a> <span class="text-uppercase margin-l-20">Pudes definir la ruta</span></h4>
+                                </div>    
+                                <?php
                             }
-                            while ($row = $query->fetch_array()) {
-                                if ($_POST["selectBuscar"] === "distancia") {
-                                    $decimals = 2;
-                                    $point1_lat = $row["latitud"];
-                                    $point1_long = $row["longitud"];
-                                    $point2_lat = $_POST["inputLatitud"];
-                                    $point2_long = $_POST["inputLongitud"];
-                                    $degrees = rad2deg(acos((sin(deg2rad($point1_lat)) * sin(deg2rad($point2_lat))) + (cos(deg2rad($point1_lat)) * cos(deg2rad($point2_lat)) * cos(deg2rad($point1_long - $point2_long)))));
-                                    $distance = $degrees * 111.13384;
-                                    $filal = round($distance, $decimals);
-                                    if ($filal <= $_POST["btnBuscar"]) {
-                                        ?>
-                                        <tr>
-                                            <td><?php echo $row['nombre']; ?></td>
-                                            <td><?php echo $row['telefono']; ?></td>
-                                            <td><?php echo $row['email']; ?></td>
-                                            <td><?php echo $row['puntuacionMas']; ?></td>
-                                            <td><?php echo $row['puntuacionMenos']; ?></td>
-                                            <td style="display: none"><?php echo $row['latitud']; ?></td>
-                                            <td style="display: none"><?php echo $row['longitud']; ?></td>
-                                        </tr>
-                                        <?php
-                                    }
-                                } else if ($_POST["selectBuscar"] === "likes" || $_POST["selectBuscar"] === "nombre" || $_POST["selectBuscar"] === "todo") {
-                                    ?>
-                                    <tr>
-                                        <td><?php echo $row['nombre']; ?></td>
-                                        <td><?php echo $row['telefono']; ?></td>
-                                        <td><?php echo $row['email']; ?></td>
-                                        <td><?php echo $row['puntuacionMas']; ?></td>
-                                        <td><?php echo $row['puntuacionMenos']; ?></td>
-                                        <td style="display: none"><?php echo $row['latitud']; ?></td>
-                                        <td style="display: none"><?php echo $row['longitud']; ?></td>
-                                    </tr>                                                                                                                                                                                                   
-                                    <?php
-                                } else if ($_POST["selectBuscar"] === "lugar") {
-                                    $lat = $row["latitud"];
-                                    $lng = $row["longitud"];
-                                    $data = file_get_contents("http://maps.google.com/maps/api/geocode/json?latlng=$lat,$lng&sensor=false");
-                                    $data = json_decode($data);
-                                    $add_array = $data->results;
-                                    $add_array = $add_array[0];
-                                    $add_array = $add_array->address_components;
-                                    $country = "Not found";
-                                    $state = "Not found";
-                                    $city = "Not found";
-                                    foreach ($add_array as $key) {
-                                        if ($key->types[0] == 'administrative_area_level_2') {
-                                            $city = $key->long_name;
-                                        }
-                                        if ($key->types[0] == 'administrative_area_level_1') {
-                                            $state = $key->long_name;
-                                        }
-                                        if ($key->types[0] == 'country') {
-                                            $country = $key->long_name;
-                                        }
-                                    }
-
-                                    if ($city === $_POST["btnBuscar"]) {
-                                        ?>
-                                        <tr>
-                                            <td><?php echo $row['nombre']; ?></td>
-                                            <td><?php echo $row['telefono']; ?></td>
-                                            <td><?php echo $row['email']; ?></td>
-                                            <td><?php echo $row['puntuacionMas']; ?></td>
-                                            <td><?php echo $row['puntuacionMenos']; ?></td>
-                                            <td style="display: none"><?php echo $row['latitud']; ?></td>
-                                            <td style="display: none"><?php echo $row['longitud']; ?></td>
-                                        </tr>       
-                                        <?php
-                                    }
+                        } else if ($_POST["selectBuscar"] === "likes" || $_POST["selectBuscar"] === "nombre" || $_POST["selectBuscar"] === "todo") {
+                            ?>
+                            <div class="col-sm-4 sm-margin-b-50" id="divGyms">
+                                <div class="margin-b-20 text-center">
+                                    <h3>Nombre: <?php echo $row['nombre']; ?></h3>
+                                    <h4>Teléfono: <?php echo $row['telefono']; ?></h4>
+                                    <h4>Email: <?php echo $row['email']; ?></h4>
+                                    <h4>Likes: <?php echo $row['puntuacionMas']; ?> Deslikes: <?php echo $row['puntuacionMenos']; ?></h4>
+                                    <h4 style="display: none"><?php echo $row['latitud']; ?></h4>
+                                    <h4 style="display: none"><?php echo $row['longitud']; ?></h4>
+                                </div>
+                                <h4 class="text-center"><a href="http://maps.google.com/maps?q=<?php echo $row["latitud"]; ?>, <?php echo $row["longitud"]; ?>">click</a> <span class="text-uppercase margin-l-20">Pudes definir la ruta</span></h4>
+                            </div>                                                                                                                                                                                        
+                            <?php
+                        } else if ($_POST["selectBuscar"] === "lugar") {
+                            $lat = $row["latitud"];
+                            $lng = $row["longitud"];
+                            $data = file_get_contents("http://maps.google.com/maps/api/geocode/json?latlng=$lat,$lng&sensor=false");
+                            $data = json_decode($data);
+                            $add_array = $data->results;
+                            $add_array = $add_array[0];
+                            $add_array = $add_array->address_components;
+                            $country = "Not found";
+                            $state = "Not found";
+                            $city = "Not found";
+                            foreach ($add_array as $key) {
+                                if ($key->types[0] == 'administrative_area_level_2') {
+                                    $city = $key->long_name;
+                                }
+                                if ($key->types[0] == 'administrative_area_level_1') {
+                                    $state = $key->long_name;
+                                }
+                                if ($key->types[0] == 'country') {
+                                    $country = $key->long_name;
                                 }
                             }
-                            $contador++;
+
+                            if ($city === $_POST["btnBuscar"]) {
+                                ?>
+                                <div class="col-sm-4 sm-margin-b-50" id="divGyms">
+                                    <div class="margin-b-20 text-center">
+                                        <h3>Nombre: <?php echo $row['nombre']; ?></h3>
+                                        <h4>Teléfono: <?php echo $row['telefono']; ?></h4>
+                                        <h4>Email: <?php echo $row['email']; ?></h4>
+                                        <h4>Likes: <?php echo $row['puntuacionMas']; ?> Deslikes: <?php echo $row['puntuacionMenos']; ?></h4>
+                                        <h4 style="display: none"><?php echo $row['latitud']; ?></h4>
+                                        <h4 style="display: none"><?php echo $row['longitud']; ?></h4>
+                                    </div>
+                                    <h4 class="text-center"><a href="http://maps.google.com/maps?q=<?php echo $row["latitud"]; ?>, <?php echo $row["longitud"]; ?>">click</a> <span class="text-uppercase margin-l-20">Pudes definir la ruta</span></h4>
+                                </div>    
+                                <?php
+                            }
                         }
-                        ?>
-                    </tbody>
+                    }
+                    $contador++;
+                }
+                ?>
+                </tbody>
                 </table>
             </div>
         </div>
-        <?php include './footer.php' ?>
-        <script src="js/jquery-3.2.1.min.js"></script>
-        <script src="js/bootstrap.min.js"></script>
-        <script src="js/MyJS/gimnasios.js"></script>
-        <script async defer
-                src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDQFJdLinZ94oC6GJD3s_IuxhBJuPRgtjM&callback=initMap">
-        </script>
-    </body>
+
+
+
+        <style>
+
+            #divGyms{
+                background-color: white !important;
+                border:1px solid black !important;
+                border-style: hidden;
+
+            }
+
+        </style>
+
+
+    </div>
+    <!--// end row -->
+</div>
+<?php include './footer.php' ?>
+<script src="js/jquery-3.2.1.min.js"></script>
+<script src="js/bootstrap.min.js"></script>
+<script src="js/MyJS/gimnasios.js"></script>
+<script async defer
+        src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDQFJdLinZ94oC6GJD3s_IuxhBJuPRgtjM&callback=initMap">
+</script>
+</body>
 </html>
 
 

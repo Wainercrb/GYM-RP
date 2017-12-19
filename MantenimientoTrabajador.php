@@ -3,7 +3,7 @@
     <head>
         <meta charset="utf-8">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
-        <title>mantenimineto usuairo</title>
+        <title>MANTENIMINETO PERSONAL</title>
         <link rel="stylesheet" href="css/bootstrap.css">
         <link rel="stylesheet" href="css/headerFooter.css">
         <link rel="stylesheet" href="css/manteniminetoUsuario.css">
@@ -11,31 +11,30 @@
     <body>
         <?php
         include './php/InfoNavbar.php';
-        include "header.php";
+        include "./header.php";
         ?>
         <?php
-        $where = "";
         $mensaje = "";
         if (isset($_POST['buscarValor'])) {
-            $filtro = $_POST['tipoFiltro'];
-            $valor = $_POST['valor'];
-            if ($filtro === "Todo" && $valor === "") {
-                $where = "ORDER by nombre DESC limit 5";
-            } else if ($filtro === "Todo" && $valor === "todo") {
+            if ($_POST["tipoFiltro"] === "nombre") {
+                $where = " AND t.nombre LIKE '%" . $_POST['valor'] . "%'";
+            } else if ($_POST["tipoFiltro"] === "apellidos") {
+                $where = " AND t.apellidoUno LIKE '%" . $_POST['valor'] . "%'";      
+            } else if ($_POST["tipoFiltro"] === "usuario") {
+                $where = " AND t.usuario LIKE '%" . $_POST['valor'] . "%'";
+            } else if ($_POST["tipoFiltro"] === "email") {
+                $where = " AND t.email LIKE '%" . $_POST['valor'] . "%'";
+            } else if ($_POST["tipoFiltro"] === "Todo") {
                 $where = "";
-            } else if ($filtro != "Todo" && $valor != "todo") {
-                $where = "where " . $filtro . " like '" . $valor . "%'";
-            } else {
-                $where = "ORDER by nombre DESC limit 5";
+            }
+            include './php/conexion.php';
+            $sql = "SELECT DISTINCT * FROM trabajador t, gym_admin gd where t.id_trabajador = gd.id_admin and id_local = $_SESSION[IDTIENDA]".$where;
+            if (!$query = $con->query($sql)) {
+                die("Error description: " . mysqli_error($con));
             }
         }
-        include './php/conexion.php';
-        $sql = "SELECT * FROM `trabajador` $where";
-        if (!$query = $con->query($sql)) {
-            echo("Error description: " . mysqli_error($con));
-            return;
-        }
         ?>
+
         <div class="container">
             <div class="row">
                 <div class="col-md-12">
@@ -52,7 +51,6 @@
                                     <option value="email">correo</option>
                                 </select>
                                 <button name="buscarValor" class="btn btn-default" type="submit">Buscar</button>
-
                             </div>
                         </div>
                     </form>
@@ -61,8 +59,7 @@
                         <div class="table-responsive" id="div-table">
                             <form name="mantenimeintoTrabajador" action="php/registroTrabajador.php.php" method="POST">
                                 <table id="mytable" class="table table-bordred table-inverse">
-                                    <thead>
-                           
+                                    <thead>        
                                     <th>Nombre</th>
                                     <th>ApellidoUno</th>
                                     <th>ApellidoDos</th>
@@ -78,39 +75,39 @@
                                     <tbody>
                                         <?php
                                         $contador = 0;
-                                        while ($row = $query->fetch_array()) {
-                                            $contador++;
-                                            $idT = $row['id_trabajador'];
-                                            $nombre = $row["nombre"];
-                                            $apellidoUno = $row['apellidoUno'];
-                                            $apellidoDos = $row['apellidoDos'];
-                                            $cedulaT = $row['cedula'];
-                                            $telefono = $row['telefono'];
-                                            $direccion = $row['direccion'];
-                                            $email = $row['email'];
-                                            $rol = $row['rol'];
-                                            $usuairo = $row['usuario'];
-                                            $contrasenna = $row["contrasenna"];
-                                            ?>
-                                            <tr>
-                                                <td style="display: none"><?php echo $idT; ?></td>
-                                                <td><?php echo $nombre; ?></td>
-                                                <td><?php echo $apellidoUno; ?></td>
-                                                <td><?php echo $apellidoDos; ?></td>
-                                                <td><?php echo $cedulaT; ?></td>
-                                                <td><?php echo $telefono; ?></td>
-                                                <td><?php echo $direccion; ?></td>
-                                                <td><?php echo $email; ?></td>
-                                                <td><?php echo $rol; ?></td>
-                                                <td><?php echo $usuairo; ?></td>
-                                                <td><?php echo $contrasenna; ?></td>                             
-                                                <td><p data-placement="top" data-toggle="tooltip" title="Edit"><button class="btn btn-primary btn-xs" data-title="Edit" data-toggle="modal" name="editar" type="button" data-target="#squarespaceModal"  value="<?php echo $idT; ?>"                                                                                                                  wainer"><span class="glyphicon glyphicon-pencil"></span></button></p></td>
-                                            </tr>
-                                            <?php
+                                        if (isset($_POST['buscarValor'])) {
+                                            while ($row = $query->fetch_array()) {
+                                                $contador++;
+                                                $idT = $row['id_trabajador'];
+                                                $nombre = $row["nombre"];
+                                                $apellidoUno = $row['apellidoUno'];
+                                                $apellidoDos = $row['apellidoDos'];
+                                                $cedulaT = $row['cedula'];
+                                                $telefono = $row['telefono'];
+                                                $direccion = $row['direccion'];
+                                                $email = $row['email'];
+                                                $rol = $row['rol'];
+                                                $usuairo = $row['usuario'];
+                                                $contrasenna = $row["contrasenna"];
+                                                ?>
+                                                <tr>
+                                                    <td style="display: none"><?php echo $idT; ?></td>
+                                                    <td><?php echo $nombre; ?></td>
+                                                    <td><?php echo $apellidoUno; ?></td>
+                                                    <td><?php echo $apellidoDos; ?></td>
+                                                    <td><?php echo $cedulaT; ?></td>
+                                                    <td><?php echo $telefono; ?></td>
+                                                    <td><?php echo $direccion; ?></td>
+                                                    <td><?php echo $email; ?></td>
+                                                    <td><?php echo $rol; ?></td>
+                                                    <td><?php echo $usuairo; ?></td>
+                                                    <td><?php echo $contrasenna; ?></td>                             
+                                                    <td><p data-placement="top" data-toggle="tooltip" title="Edit"><button class="btn btn-primary btn-xs" data-title="Edit" data-toggle="modal" name="editar" type="button" data-target="#squarespaceModal"  value="<?php echo $idT; ?>"                                                                                                                  wainer"><span class="glyphicon glyphicon-pencil"></span></button></p></td>
+                                                </tr>
+                                                <?php
+                                            }
                                         }
-
                                         if ($contador === 0) {
-
                                             $mensaje = "<h1 class = 'text-center' style='color:red;'>No se encontraron registros</h1>";
                                         }
                                         ?>
@@ -122,8 +119,6 @@
                 </div>
             </div>
         </div>
-
-        <!-- line modal -->
         <div class="modal fade" id="squarespaceModal" tabindex="-1" role="dialog" aria-labelledby="modalLabel" aria-hidden="true">
             <div class="modal-dialog">
                 <div class="modal-content">
@@ -153,32 +148,31 @@
                                 <label for="exampleInputEmail1">Cedula</label>
                                 <input type="text" class="form-control" name="txtCedula" id="txtCedula">
                             </div>
-                             <div class="form-group">
+                            <div class="form-group">
                                 <label for="exampleInputEmail1">Telefono</label>
                                 <input type="text" class="form-control" name="txtTelefono" id="txtTelefono">
                             </div>
-                             <div class="form-group">
-                                <label for="exampleInputEmail1">Direccion</label>
+                            <div class="form-group">
+                                <label for="exampleInputEmail1">Dirección</label>
                                 <input type="text" class="form-control" name="txtDireccion" id="txtDireccion">
                             </div>
-                             <div class="form-group">
+                            <div class="form-group">
                                 <label for="exampleInputEmail1">Email</label>
                                 <input type="text" class="form-control" name="txtEmail" id="txtEmail">
                             </div>
-                             <div class="form-group">
+                            <div class="form-group">
                                 <label for="exampleInputEmail1">Rol</label>
                                 <input type="text" class="form-control" name="txtRol" id="txtRol">
                             </div>
-                             <div class="form-group">
+                            <div class="form-group">
                                 <label for="exampleInputEmail1">Usuario</label>
                                 <input type="text" class="form-control" name="txtUsuario" id="txtUsuario">
                             </div>
-                             <div class="form-group">
+                            <div class="form-group">
                                 <label for="exampleInputEmail1">Contraseña</label>
                                 <input type="text" class="form-control" name="txtContrasena" id="txtContrasena">
                             </div>
                             <input type="submit" class="btn btn-warning" name="btnEliminar" value="Eliminar">
-
                         </div>
                         <div class="modal-footer">
                             <div class="btn-group btn-group-justified" role="group" aria-label="group button">
@@ -194,16 +188,11 @@
                 </div>
             </div>
         </div>
-
         <?php
         echo $mensaje;
         ?>
-
-
-
         <?php include "footer.php" ?>
         <script>
-
             var table = document.getElementsByTagName("table")[0];
             var tbody = table.getElementsByTagName("tbody")[0];
             tbody.onclick = function (e) {
@@ -215,40 +204,14 @@
                 }
                 if (target) {
                     var cells = target.getElementsByTagName("td");
-                    var id = document.getElementById("txtId").value = cells[0].innerHTML;
-                    var nombre = document.getElementById("txtnombre").value = cells[1].innerHTML;
-                    var apellidoUno = document.getElementById("txtApellidoUno").value = cells[2].innerHTML;
-                    var apellidoDos = document.getElementById("txtApellidoDos").value = cells[3].innerHTML;
-                    var Cedula = document.getElementById("txtCedula").value = cells[4].innerHTML;
-                    var telefono = document.getElementById("txtTelefono").value = cells[5].innerHTML;
-                    var Email = document.getElementById("txtDireccion").value = cells[6].innerHTML;
-                    var Direccion = document.getElementById("txtEmail").value = cells[7].innerHTML;
-                    var rol = document.getElementById("txtRol").value = cells[8].innerHTML;
-                    var usuario = document.getElementById("txtUsuario").value = cells[9].innerHTML;
-                    var contraseña = document.getElementById("txtContrasena").value = cells[10].innerHTML;
-                    alert(id);
-                    alert(nombre);
-                    alert(apellidoUno);
-                    alert(apellidoDos);
-                    alert(Cedula);
-                    alert(telefono);
-                    alert(Email);
-                    alert(Direccion);
-                    alert(rol);
-                    alert(usuario);
-                    alert(contraseña);
-
-
-
-
                     document.getElementById("txtId").value = cells[0].innerHTML;
                     document.getElementById("txtnombre").value = cells[1].innerHTML;
                     document.getElementById("txtApellidoUno").value = cells[2].innerHTML;
                     document.getElementById("txtApellidoDos").value = cells[3].innerHTML;
                     document.getElementById("txtCedula").value = cells[4].innerHTML;
-                    document.getElementById("txtDireccion").value = cells[5].innerHTML;
-                    document.getElementById("txtEmail").value = cells[6].innerHTML;
-                    document.getElementById("txtDireccion").value = cells[7].innerHTML;
+                    document.getElementById("txtTelefono").value = cells[5].innerHTML;
+                    document.getElementById("txtDireccion").value = cells[6].innerHTML;
+                    document.getElementById("txtEmail").value = cells[7].innerHTML;
                     document.getElementById("txtRol").value = cells[8].innerHTML;
                     document.getElementById("txtUsuario").value = cells[9].innerHTML;
                     document.getElementById("txtContrasena").value = cells[10].innerHTML;

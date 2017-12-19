@@ -46,16 +46,10 @@ if (isset($_POST["txtName"]) && isset($_POST["txtSurnames"]) && isset($_POST["tx
     $usuario->setEdad($_REQUEST["txtAge"]);
     $usuario->setGenero($_REQUEST["cbGenero"]);
     $usuario->setFoto($_FILES["image"]);
-
-    if ($usuario->getId_usuario() > 0) {
-        
+    if ($usuario->getId_usuario() > 0) {     
     } else {
         if ($usuario->isUsuarioExiste() === FALSE) {
             session_start();
-            var_dump($_SESSION);
-
-
-
             print $usuario->guardarUsuario($_SESSION["IDTIENDA"]);
         } else {
             print "<script>alert(\"Error usuario o contraseña ya existen :v\");window.location='../registroUsuario.php';</script>";

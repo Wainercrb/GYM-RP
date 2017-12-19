@@ -24,7 +24,7 @@
             <h1 class="text-center">Mis citas pendientes</h1>
             <div class="row category-child" style="margin-top:20px">
                 <?php
-                $sql = "SELECT * FROM `cita` WHERE id_trabajador = $_SESSION[ID]";
+                $sql = "SELECT DISTINCT c.id_cita, c.fecha, c.detalles, c.estado, u.email, t.nombre, t.apellidoUno, t.apellidoDos, u.nombre as nombreUsuario, u.apellidos as apellidosUsuario FROM cita c, usuario u, trabajador t WHERE c.id_usuario = u.id_usuario AND c.id_trabajador = t.id_trabajador AND c.id_trabajador = $_SESSION[ID]";
                 if (!$query = $con->query($sql)) {
                     die("Error description: " . mysqli_error($con));
                     return;
@@ -35,17 +35,26 @@
                     ?>
                     <div class="col-lg-2 col-md-4 col-xs-6 thumb ">
                         <form name="frmTerminaCita" action="php/citas.php" method="POST" enctype="multipart/form-data">
-                            <a class="thumbnail" href="#">
+                            <div class="thumbnail" href="#">
                                 <img class="img-responsive" src="imagenes/calendar.png" alt="">
                                 <div class="wrapper">
                                     <div class="caption post-content">
-                                        <h6><?php echo "fecha: " . $row["fecha"]; ?></h6>
-                                        <h6><?php echo "detalle: " . $row["detalles"]; ?></h6>
+                                        <h6><?php echo "Fecha: " . $row["fecha"]; ?></h6>
+                                        <h6><?php echo "Detalles: " . $row["detalles"]; ?></h6>
+                                        <h6><?php echo "Estado: " . $row["estado"]; ?></h6>
                                         <input style="display: none" name="idCita" value="<?php echo $row["id_cita"]; ?>" />
+                                        <input style="display: none" name="idEmail" value="<?php echo $row["email"]; ?>" />
+                                        <input style="display: none" name="idTrabajador" value="<?php echo $row["nombre"]." ".$row["apellidoUno"]." ".$row["apellidoDos"]; ?>" />
+                                        <input style="display: none" name="idFecha" value="<?php echo $row["fecha"]; ?>" />
+                                        <input style="display: none" name="idUsuario" value="<?php echo $row["nombreUsuario"]." ".$row["apellidosUsuario"]; ?>" />
+                                        <input value="Aprobar" name="btnAprobar" type="submit" class="btn btn-default btn-group-justified">
+                                        <br>
                                         <input value="Terminar" name="btnTermina" type="submit" class="btn btn-default btn-group-justified">
+                                        <br>
+                                        <input value="Rechazar" name="btnRechazar" type="submit" class="btn btn-default btn-group-justified">
                                     </div>
                                 </div>
-                            </a>
+                            </div>
                         </form>
                     </div>   
                     <?php

@@ -1,5 +1,6 @@
 <?php
- if (isset($_REQUEST["btnEliminar"])) {
+
+if (isset($_REQUEST["btnEliminar"])) {
     include '../Clases/Trabajador.php';
     $trabajador = new trabajador();
     $trabajador->setId_trabajador($_POST["txtId"]);
@@ -12,7 +13,7 @@
     $Trabajador->setApellidoUno($_REQUEST["txtApellidoUno"]);
     $Trabajador->setApellidoDos($_REQUEST["txtApellidoDos"]);
     $Trabajador->setCedula($_REQUEST["txtCedula"]);
-     $Trabajador->setTelefono($_REQUEST["txtTelefono"]);
+    $Trabajador->setTelefono($_REQUEST["txtTelefono"]);
     $Trabajador->setDireccion($_REQUEST["txtDireccion"]);
     $Trabajador->setEmail($_REQUEST["txtEmail"]);
     $Trabajador->setRol($_REQUEST["txtRol"]);
@@ -38,10 +39,10 @@
         if ($trabajador->getId_trabajador() > 0) {
             
         } else {
-            if ($trabajador->isTrabajadorExiste()=== FALSE) {
+            if ($trabajador->isTrabajadorExiste() === FALSE) {
                 print $trabajador->guardarTrabajador($_SESSION["IDTIENDA"]);
             } else {
-             print "<script>alert(\"Error usuario o email ya existen :v\");window.location='../RegistroTrabajador.php';</script>";
+                print "<script>alert(\"Error usuario o email ya existen :v\");window.location='../RegistroTrabajador.php';</script>";
             }
         }
     }
@@ -49,6 +50,5 @@
 }
 //}
 ////=======
-
 // f08f2a2634b10eaf60ed7782dad72f64edbe4f7e
 ?>
